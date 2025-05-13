@@ -18,15 +18,15 @@ module.exports = {
         lora: ["Lora", "serif"],
       },
       fontSize: {
-        "48px": "48px",
-        "20px": "20px",
-        "14px": "14px",
-        "12px": "12px",
-        "10px": "10px",
+        xl: "48px",
+        lg: "20px",
+        base: "14px",
+        sm: "12px",
+        xs: "10px",
       },
       borderRadius: {
-        "16px": "16px",
-        "8px": "8px",
+        xl: "16px",
+        md: "8px",
         full: "50%",
       },
       backgroundColor: {
@@ -40,5 +40,6 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  plugins: [require("tailwind-scrollbar-hide")],
 };

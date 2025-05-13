@@ -10,14 +10,6 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: "Lora", serif;
-  letter-spacing: 0.06em;
-  background-color: #0f0f0f;
-  color: #e8e8e8;
-  font-size: 14px;
-}
-
 html {
   font-size: 100%;
 }
@@ -29,4 +21,9 @@ a {
 
 *::selection {
   background-color: #ad2419;
+}
+
+html,
+body {
+  @apply scrollbar-hide;
 }
