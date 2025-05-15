@@ -12,7 +12,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const canGoForward = false;
 
   return (
-    <Container className="flex flex-col overflow-auto">
+    <Container className="flex flex-col overflow-auto w-full">
       {/* Header */}
       <header className="sticky top-0 z-10 h-[44px] py-[44px] flex items-center justify-between">
         {/* Left side */}
@@ -35,10 +35,10 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
           </Button>
 
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#BCBCBC]" />
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-secondaryLight" />
             <Input
               placeholder="Search everything"
-              className="pl-10 bg-[#2a2b2e] border-none text-white placeholder-[#BCBCBC] w-[300px] h-[36px] rounded-[6px]"
+              className="pl-12 bg-primary border-border text-textPrimary placeholder-text-secondaryLight w-[300px] h-[36px] rounded-xl"
             />
           </div>
         </div>
@@ -59,7 +59,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
       </header>
 
       {/* Main content */}
-      <main className="flex-1 overflow-auto">{children}</main>
+      <main className="overflow-auto min-w-full">{children}</main>
     </Container>
   );
 };

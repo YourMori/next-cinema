@@ -36,7 +36,7 @@ export const Sidebar = () => {
   const [activeItem, setActiveItem] = useState<string>("Browse");
 
   return (
-    <Container className="sticky top-0 left-0 z-50 w-[272px] h-screen flex flex-col justify-between py-[50px] text-textSecondary text-base font-regular border-r border-border bg-primary">
+    <Container className="sticky top-0 left-0 z-50 min-w-[272px] h-screen flex flex-col justify-between py-[50px] text-textSecondary text-base font-regular border-r border-border bg-primary">
       {/* Header */}
       <div className="flex">
         <Label className="text-textPrimary text-lg font-semibold">Mori</Label>

@@ -9,8 +9,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-red text-textPrimary rounded-full w-10 h-10 p-0 flex items-center justify-center hover:bg-red/90",
-        ghost: "bg-transparent text-textPrimary w-8 h-8",
+        default: "bg-red text-textPrimary rounded-full px-4 py-2 flex items-center justify-center hover:bg-red/90",
+        ghost: "bg-transparent text-textPrimary px-4 py-2items-center justify-center hover:bg-transparent/90",
+        secondary: "bg-border text-textSecondary px-4 py-2 items-center justify-center hover:bg-border/90 hover:text-textSecondary/90",
       },
       size: {
         default: "h-9 px-2 py-2 has-[>svg]:px-3",

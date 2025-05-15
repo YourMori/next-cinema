@@ -1,0 +1,140 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id            Int             @id @default(autoincrement())
+  username      String          @unique
+  email         String          @unique
+  password_hash String
+  created_at    DateTime        @default(now())
+  
+  tokens        LoginTokens[] 
+  reviews       Reviews[] 
+  bookmarks     BookmarkedMovies[]
+  watchedMovies WatchedMovies[] 
+  followers     Followers[]     @relation("Following") 
+  following     Followers[]     @relation("Followers")
+}
+
+model LoginTokens {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  token      String
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+  
+  user       Users    @relation(fields: [userId], references: [id])
+}
+
+model Movies {
+  id            Int             @id @default(autoincrement())
+  title         String
+  description   String?
+  release_year  Int
+  imageUrl      String
+  posterUrl     String?
+  duration      Int
+  rating        Float
+  releaseDate   DateTime
+  created_at    DateTime        @default(now())
+
+  categories    MoviesCategories[] 
+  reviews       Reviews[] 
+  bookmarks     BookmarkedMovies[]
+  watchedMovies WatchedMovies[] 
+  featuredMovie FeaturedMovie? 
+}
+
+model Categories {
+  id                Int       @id @default(autoincrement())
+  name              String
+  description       String    @unique
+  
+  movies            MoviesCategories[]
+  homepageSections  HomepageSection[]
+}
+
+model MoviesCategories {
+  movieId    Int
+  categoryId Int
+  
+  movie      Movies     @relation(fields: [movieId], references: [id])
+  category   Categories @relation(fields: [categoryId], references: [id])
+  
+  @@id([movieId, categoryId])
+}
+
+model FeaturedMovie {
+  id         Int       @id @default(autoincrement())
+  movieId    Int       @unique
+  updatedAt  DateTime  @default(now())
+
+  movie      Movies    @relation(fields: [movieId], references: [id])
+}
+
+model HomepageSection {
+  id          Int        @id @default(autoincrement())
+  categoryId  Int
+  title       String
+  sortOrder   Int
+  movieLimit  Int
+
+  category    Categories @relation(fields: [categoryId], references: [id])
+}
+
+model Reviews {
+  id         Int      @id @default(autoincrement())
+  movieId    Int
+  userId     Int
+  rating     Float
+  comment    String?
+  createdAt  DateTime @default(now())
+
+  user       Users    @relation(fields: [userId], references: [id])
+  movie      Movies   @relation(fields: [movieId], references: [id])
+}
+
+model BookmarkedMovies {
+  userId        Int
+  movieId       Int
+  bookmarkedAt  DateTime @default(now())
+
+  user          Users    @relation(fields: [userId], references: [id])
+  movie         Movies   @relation(fields: [movieId], references: [id])
+
+  @@id([userId, movieId])
+}
+
+model WatchedMovies {
+  userId     Int
+  movieId    Int
+  watchedAt  DateTime @default(now())
+
+  user       Users     @relation(fields: [userId], references: [id])
+  movie      Movies    @relation(fields: [movieId], references: [id])
+
+  @@id([userId, movieId])
+}
+
+model Followers {
+  userId      Int
+  followerId  Int
+
+  user        Users  @relation("Followers", fields: [userId], references: [id]) 
+  follower    Users  @relation("Following", fields: [followerId], references: [id]) 
+
+  @@id([userId, followerId])
+}
