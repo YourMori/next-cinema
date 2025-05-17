@@ -10,7 +10,7 @@ export const FormInput = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLIn
         value={value}
         onChange={onChange}
         required={required}
-        className={`px-4 py-2 bg-primary border-border text-textPrimary placeholder-text-secondaryLight h-9 ` + (className ?? "")}
+        className={`px-4 py-2 bg-primary border-border text-textPrimary placeholder-text-secondaryLight h-9 w-full ` + (className ?? "")}
         autoComplete={autoComplete}
         {...props}
       />

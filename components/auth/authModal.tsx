@@ -16,7 +16,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <Dialog isOpen={isOpen} onClose={onClose}>
-      <div className="p-6 max-w-md w-full">
+      <div className="p-6">
         <h2 className="text-lg font-semibold mb-6">{isLogin ? "Вход" : "Регистрация"}</h2>
 
         {isLogin ? (

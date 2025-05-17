@@ -69,10 +69,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
           </Button>
 
           {/* Dropdown Avatar */}
-          <UserDropdown
-            onSignIn={() => setAuthOpen(true)} // открываем модалку
-            onSignOut={() => console.log("Signed out")}
-          />
+          <UserDropdown onSignIn={() => setAuthOpen(true)} onSignOut={() => console.log("Signed out")} />
         </div>
       </header>
 
