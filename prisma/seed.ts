@@ -1,5 +1,7 @@
+import { hashSync } from "bcrypt";
+
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const { PrismaClient } = require("../lib/generated/prisma"); // Путь может отличаться в зависимости от твоей структуры проекта
+import { PrismaClient } from "../lib/generated/prisma"; // Путь может отличаться в зависимости
 const prisma = new PrismaClient();
 
 async function main() {
@@ -13,14 +15,14 @@ async function main() {
   await prisma.movies.deleteMany({});
   await prisma.categories.deleteMany({});
   await prisma.users.deleteMany({});
-  await prisma.loginTokens.deleteMany({});
 
   // Создание пользователей
   const user1 = await prisma.users.create({
     data: {
       username: "john_doe",
       email: "john@example.com",
-      password_hash: "hashed_password_1",
+      role: "user",
+      password: hashSync("hashed_password_1", 10),
     },
   });
 
@@ -28,15 +30,17 @@ async function main() {
     data: {
       username: "jane_smith",
       email: "jane@example.com",
-      password_hash: "hashed_password_2",
+      role: "user",
+      password: hashSync("hashed_password_2", 10),
     },
   });
 
   const user3 = await prisma.users.create({
     data: {
-      username: "alex_jones",
-      email: "alex@example.com",
-      password_hash: "hashed_password_3",
+      username: "Mori",
+      email: "pa4ok_28@mail.ru",
+      role: "ADMIN",
+      password: hashSync("15042003Ahri", 10),
     },
   });
 

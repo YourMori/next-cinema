@@ -1,9 +1,13 @@
 "use client";
 
+import React, { useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Search, Bell, MessageSquare } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Avatar, AvatarFallback, AvatarImage, Input, Button, Container } from "@/components/ui";
+import { Input, Button, Container } from "@/components/ui";
+import { AuthModal, UserDropdown } from "@/components/auth";
+import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 
 export const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -11,10 +15,22 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const canGoBack = typeof window !== "undefined" && window.history.length > 1;
   const canGoForward = false;
 
+  const [authOpen, setAuthOpen] = React.useState(false);
+
+  const { status } = useSession();
+  const prevStatus = useRef(status);
+
+  useEffect(() => {
+    if (prevStatus.current === "authenticated" && status === "unauthenticated") {
+      toast.success("Вы вышли из аккаунта");
+    }
+    prevStatus.current = status;
+  }, [status]);
+
   return (
-    <Container className="flex flex-col overflow-auto w-full">
+    <Container className="flex flex-col w-full">
       {/* Header */}
-      <header className="sticky top-0 z-10 h-[44px] py-[44px] flex items-center justify-between">
+      <header className="sticky top-0 z-10 bg-primary pt-[44px] pb-[22px] mb-[22px] border-b border-border flex items-center justify-between">
         {/* Left side */}
         <div className="flex items-center gap-4">
           <Button
@@ -51,15 +67,19 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
           <Button variant="ghost" className="p-2 text-white">
             <Bell className="w-5 h-5" />
           </Button>
-          <Avatar className="w-[24px] h-[24px] mr-[16px] cursor-pointer">
-            <AvatarImage src="https://github.com/shadcn.png" alt="avatar" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+
+          {/* Dropdown Avatar */}
+          <UserDropdown
+            onSignIn={() => setAuthOpen(true)} // открываем модалку
+            onSignOut={() => console.log("Signed out")}
+          />
         </div>
       </header>
 
       {/* Main content */}
       <main className="overflow-auto min-w-full">{children}</main>
+
+      <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
     </Container>
   );
 };

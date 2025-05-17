@@ -25,11 +25,11 @@ const navItems: NavItem[] = [
 ];
 
 const users: User[] = [
-  { id: 1, name: "User 1", image: "https://github.com/shadcn.png", isActive: true },
-  { id: 2, name: "User 2", image: "https://github.com/shadcn.png", isActive: true },
-  { id: 3, name: "User 3", image: "https://github.com/shadcn.png", isActive: true },
-  { id: 4, name: "User 4", image: "https://github.com/shadcn.png", isActive: false },
-  { id: 5, name: "User 5", image: "https://github.com/shadcn.png", isActive: false },
+  { id: 1, name: "User 1", image: "/111.jpg", isActive: true },
+  { id: 2, name: "User 2", image: "/111.jpg", isActive: true },
+  { id: 3, name: "User 3", image: "/111.jpg", isActive: true },
+  { id: 4, name: "User 4", image: "/111.jpg", isActive: false },
+  { id: 5, name: "User 5", image: "/111.jpg", isActive: false },
 ];
 
 export const Sidebar = () => {

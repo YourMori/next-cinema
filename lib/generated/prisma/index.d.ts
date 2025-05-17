@@ -19,11 +19,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Users = $Result.DefaultSelection<Prisma.$UsersPayload>
 /**
- * Model LoginTokens
- * 
- */
-export type LoginTokens = $Result.DefaultSelection<Prisma.$LoginTokensPayload>
-/**
  * Model Movies
  * 
  */
@@ -205,16 +200,6 @@ export class PrismaClient<
   get users(): Prisma.UsersDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.loginTokens`: Exposes CRUD operations for the **LoginTokens** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more LoginTokens
-    * const loginTokens = await prisma.loginTokens.findMany()
-    * ```
-    */
-  get loginTokens(): Prisma.LoginTokensDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.movies`: Exposes CRUD operations for the **Movies** model.
     * Example usage:
     * ```ts
@@ -361,8 +346,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.7.0
-   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   * Prisma Client JS version: 6.8.1
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -744,7 +729,6 @@ export namespace Prisma {
 
   export const ModelName: {
     Users: 'Users',
-    LoginTokens: 'LoginTokens',
     Movies: 'Movies',
     Categories: 'Categories',
     MoviesCategories: 'MoviesCategories',
@@ -772,7 +756,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "users" | "loginTokens" | "movies" | "categories" | "moviesCategories" | "featuredMovie" | "homepageSection" | "reviews" | "bookmarkedMovies" | "watchedMovies" | "followers"
+      modelProps: "users" | "movies" | "categories" | "moviesCategories" | "featuredMovie" | "homepageSection" | "reviews" | "bookmarkedMovies" | "watchedMovies" | "followers"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -847,80 +831,6 @@ export namespace Prisma {
           count: {
             args: Prisma.UsersCountArgs<ExtArgs>
             result: $Utils.Optional<UsersCountAggregateOutputType> | number
-          }
-        }
-      }
-      LoginTokens: {
-        payload: Prisma.$LoginTokensPayload<ExtArgs>
-        fields: Prisma.LoginTokensFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.LoginTokensFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LoginTokensPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.LoginTokensFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LoginTokensPayload>
-          }
-          findFirst: {
-            args: Prisma.LoginTokensFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LoginTokensPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.LoginTokensFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LoginTokensPayload>
-          }
-          findMany: {
-            args: Prisma.LoginTokensFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LoginTokensPayload>[]
-          }
-          create: {
-            args: Prisma.LoginTokensCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LoginTokensPayload>
-          }
-          createMany: {
-            args: Prisma.LoginTokensCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.LoginTokensCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LoginTokensPayload>[]
-          }
-          delete: {
-            args: Prisma.LoginTokensDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LoginTokensPayload>
-          }
-          update: {
-            args: Prisma.LoginTokensUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LoginTokensPayload>
-          }
-          deleteMany: {
-            args: Prisma.LoginTokensDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.LoginTokensUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.LoginTokensUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LoginTokensPayload>[]
-          }
-          upsert: {
-            args: Prisma.LoginTokensUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LoginTokensPayload>
-          }
-          aggregate: {
-            args: Prisma.LoginTokensAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateLoginTokens>
-          }
-          groupBy: {
-            args: Prisma.LoginTokensGroupByArgs<ExtArgs>
-            result: $Utils.Optional<LoginTokensGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.LoginTokensCountArgs<ExtArgs>
-            result: $Utils.Optional<LoginTokensCountAggregateOutputType> | number
           }
         }
       }
@@ -1675,7 +1585,6 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     users?: UsersOmit
-    loginTokens?: LoginTokensOmit
     movies?: MoviesOmit
     categories?: CategoriesOmit
     moviesCategories?: MoviesCategoriesOmit
@@ -1779,7 +1688,6 @@ export namespace Prisma {
    */
 
   export type UsersCountOutputType = {
-    tokens: number
     reviews: number
     bookmarks: number
     watchedMovies: number
@@ -1788,7 +1696,6 @@ export namespace Prisma {
   }
 
   export type UsersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tokens?: boolean | UsersCountOutputTypeCountTokensArgs
     reviews?: boolean | UsersCountOutputTypeCountReviewsArgs
     bookmarks?: boolean | UsersCountOutputTypeCountBookmarksArgs
     watchedMovies?: boolean | UsersCountOutputTypeCountWatchedMoviesArgs
@@ -1805,13 +1712,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the UsersCountOutputType
      */
     select?: UsersCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UsersCountOutputType without action
-   */
-  export type UsersCountOutputTypeCountTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LoginTokensWhereInput
   }
 
   /**
@@ -1974,26 +1874,35 @@ export namespace Prisma {
 
   export type UsersMinAggregateOutputType = {
     id: number | null
-    username: string | null
     email: string | null
-    password_hash: string | null
+    username: string | null
+    password: string | null
+    role: string | null
     created_at: Date | null
+    provider: string | null
+    providerId: string | null
   }
 
   export type UsersMaxAggregateOutputType = {
     id: number | null
-    username: string | null
     email: string | null
-    password_hash: string | null
+    username: string | null
+    password: string | null
+    role: string | null
     created_at: Date | null
+    provider: string | null
+    providerId: string | null
   }
 
   export type UsersCountAggregateOutputType = {
     id: number
-    username: number
     email: number
-    password_hash: number
+    username: number
+    password: number
+    role: number
     created_at: number
+    provider: number
+    providerId: number
     _all: number
   }
 
@@ -2008,26 +1917,35 @@ export namespace Prisma {
 
   export type UsersMinAggregateInputType = {
     id?: true
-    username?: true
     email?: true
-    password_hash?: true
+    username?: true
+    password?: true
+    role?: true
     created_at?: true
+    provider?: true
+    providerId?: true
   }
 
   export type UsersMaxAggregateInputType = {
     id?: true
-    username?: true
     email?: true
-    password_hash?: true
+    username?: true
+    password?: true
+    role?: true
     created_at?: true
+    provider?: true
+    providerId?: true
   }
 
   export type UsersCountAggregateInputType = {
     id?: true
-    username?: true
     email?: true
-    password_hash?: true
+    username?: true
+    password?: true
+    role?: true
     created_at?: true
+    provider?: true
+    providerId?: true
     _all?: true
   }
 
@@ -2119,10 +2037,13 @@ export namespace Prisma {
 
   export type UsersGroupByOutputType = {
     id: number
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at: Date
+    provider: string | null
+    providerId: string | null
     _count: UsersCountAggregateOutputType | null
     _avg: UsersAvgAggregateOutputType | null
     _sum: UsersSumAggregateOutputType | null
@@ -2146,11 +2067,13 @@ export namespace Prisma {
 
   export type UsersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    username?: boolean
     email?: boolean
-    password_hash?: boolean
+    username?: boolean
+    password?: boolean
+    role?: boolean
     created_at?: boolean
-    tokens?: boolean | Users$tokensArgs<ExtArgs>
+    provider?: boolean
+    providerId?: boolean
     reviews?: boolean | Users$reviewsArgs<ExtArgs>
     bookmarks?: boolean | Users$bookmarksArgs<ExtArgs>
     watchedMovies?: boolean | Users$watchedMoviesArgs<ExtArgs>
@@ -2161,31 +2084,39 @@ export namespace Prisma {
 
   export type UsersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    username?: boolean
     email?: boolean
-    password_hash?: boolean
+    username?: boolean
+    password?: boolean
+    role?: boolean
     created_at?: boolean
+    provider?: boolean
+    providerId?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type UsersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    username?: boolean
     email?: boolean
-    password_hash?: boolean
+    username?: boolean
+    password?: boolean
+    role?: boolean
     created_at?: boolean
+    provider?: boolean
+    providerId?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type UsersSelectScalar = {
     id?: boolean
-    username?: boolean
     email?: boolean
-    password_hash?: boolean
+    username?: boolean
+    password?: boolean
+    role?: boolean
     created_at?: boolean
+    provider?: boolean
+    providerId?: boolean
   }
 
-  export type UsersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "password_hash" | "created_at", ExtArgs["result"]["users"]>
+  export type UsersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "username" | "password" | "role" | "created_at" | "provider" | "providerId", ExtArgs["result"]["users"]>
   export type UsersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tokens?: boolean | Users$tokensArgs<ExtArgs>
     reviews?: boolean | Users$reviewsArgs<ExtArgs>
     bookmarks?: boolean | Users$bookmarksArgs<ExtArgs>
     watchedMovies?: boolean | Users$watchedMoviesArgs<ExtArgs>
@@ -2199,7 +2130,6 @@ export namespace Prisma {
   export type $UsersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Users"
     objects: {
-      tokens: Prisma.$LoginTokensPayload<ExtArgs>[]
       reviews: Prisma.$ReviewsPayload<ExtArgs>[]
       bookmarks: Prisma.$BookmarkedMoviesPayload<ExtArgs>[]
       watchedMovies: Prisma.$WatchedMoviesPayload<ExtArgs>[]
@@ -2208,10 +2138,13 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      username: string
       email: string
-      password_hash: string
+      username: string
+      password: string
+      role: string
       created_at: Date
+      provider: string | null
+      providerId: string | null
     }, ExtArgs["result"]["users"]>
     composites: {}
   }
@@ -2606,7 +2539,6 @@ export namespace Prisma {
    */
   export interface Prisma__UsersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    tokens<T extends Users$tokensArgs<ExtArgs> = {}>(args?: Subset<T, Users$tokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoginTokensPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviews<T extends Users$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, Users$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     bookmarks<T extends Users$bookmarksArgs<ExtArgs> = {}>(args?: Subset<T, Users$bookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookmarkedMoviesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     watchedMovies<T extends Users$watchedMoviesArgs<ExtArgs> = {}>(args?: Subset<T, Users$watchedMoviesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WatchedMoviesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2642,10 +2574,13 @@ export namespace Prisma {
    */
   interface UsersFieldRefs {
     readonly id: FieldRef<"Users", 'Int'>
-    readonly username: FieldRef<"Users", 'String'>
     readonly email: FieldRef<"Users", 'String'>
-    readonly password_hash: FieldRef<"Users", 'String'>
+    readonly username: FieldRef<"Users", 'String'>
+    readonly password: FieldRef<"Users", 'String'>
+    readonly role: FieldRef<"Users", 'String'>
     readonly created_at: FieldRef<"Users", 'DateTime'>
+    readonly provider: FieldRef<"Users", 'String'>
+    readonly providerId: FieldRef<"Users", 'String'>
   }
     
 
@@ -3034,30 +2969,6 @@ export namespace Prisma {
   }
 
   /**
-   * Users.tokens
-   */
-  export type Users$tokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensInclude<ExtArgs> | null
-    where?: LoginTokensWhereInput
-    orderBy?: LoginTokensOrderByWithRelationInput | LoginTokensOrderByWithRelationInput[]
-    cursor?: LoginTokensWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: LoginTokensScalarFieldEnum | LoginTokensScalarFieldEnum[]
-  }
-
-  /**
    * Users.reviews
    */
   export type Users$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3197,1102 +3108,6 @@ export namespace Prisma {
 
 
   /**
-   * Model LoginTokens
-   */
-
-  export type AggregateLoginTokens = {
-    _count: LoginTokensCountAggregateOutputType | null
-    _avg: LoginTokensAvgAggregateOutputType | null
-    _sum: LoginTokensSumAggregateOutputType | null
-    _min: LoginTokensMinAggregateOutputType | null
-    _max: LoginTokensMaxAggregateOutputType | null
-  }
-
-  export type LoginTokensAvgAggregateOutputType = {
-    id: number | null
-    userId: number | null
-  }
-
-  export type LoginTokensSumAggregateOutputType = {
-    id: number | null
-    userId: number | null
-  }
-
-  export type LoginTokensMinAggregateOutputType = {
-    id: number | null
-    userId: number | null
-    token: string | null
-    createdAt: Date | null
-    expiresAt: Date | null
-  }
-
-  export type LoginTokensMaxAggregateOutputType = {
-    id: number | null
-    userId: number | null
-    token: string | null
-    createdAt: Date | null
-    expiresAt: Date | null
-  }
-
-  export type LoginTokensCountAggregateOutputType = {
-    id: number
-    userId: number
-    token: number
-    createdAt: number
-    expiresAt: number
-    _all: number
-  }
-
-
-  export type LoginTokensAvgAggregateInputType = {
-    id?: true
-    userId?: true
-  }
-
-  export type LoginTokensSumAggregateInputType = {
-    id?: true
-    userId?: true
-  }
-
-  export type LoginTokensMinAggregateInputType = {
-    id?: true
-    userId?: true
-    token?: true
-    createdAt?: true
-    expiresAt?: true
-  }
-
-  export type LoginTokensMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    token?: true
-    createdAt?: true
-    expiresAt?: true
-  }
-
-  export type LoginTokensCountAggregateInputType = {
-    id?: true
-    userId?: true
-    token?: true
-    createdAt?: true
-    expiresAt?: true
-    _all?: true
-  }
-
-  export type LoginTokensAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which LoginTokens to aggregate.
-     */
-    where?: LoginTokensWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of LoginTokens to fetch.
-     */
-    orderBy?: LoginTokensOrderByWithRelationInput | LoginTokensOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: LoginTokensWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` LoginTokens from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` LoginTokens.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned LoginTokens
-    **/
-    _count?: true | LoginTokensCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: LoginTokensAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: LoginTokensSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: LoginTokensMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: LoginTokensMaxAggregateInputType
-  }
-
-  export type GetLoginTokensAggregateType<T extends LoginTokensAggregateArgs> = {
-        [P in keyof T & keyof AggregateLoginTokens]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateLoginTokens[P]>
-      : GetScalarType<T[P], AggregateLoginTokens[P]>
-  }
-
-
-
-
-  export type LoginTokensGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LoginTokensWhereInput
-    orderBy?: LoginTokensOrderByWithAggregationInput | LoginTokensOrderByWithAggregationInput[]
-    by: LoginTokensScalarFieldEnum[] | LoginTokensScalarFieldEnum
-    having?: LoginTokensScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: LoginTokensCountAggregateInputType | true
-    _avg?: LoginTokensAvgAggregateInputType
-    _sum?: LoginTokensSumAggregateInputType
-    _min?: LoginTokensMinAggregateInputType
-    _max?: LoginTokensMaxAggregateInputType
-  }
-
-  export type LoginTokensGroupByOutputType = {
-    id: number
-    userId: number
-    token: string
-    createdAt: Date
-    expiresAt: Date
-    _count: LoginTokensCountAggregateOutputType | null
-    _avg: LoginTokensAvgAggregateOutputType | null
-    _sum: LoginTokensSumAggregateOutputType | null
-    _min: LoginTokensMinAggregateOutputType | null
-    _max: LoginTokensMaxAggregateOutputType | null
-  }
-
-  type GetLoginTokensGroupByPayload<T extends LoginTokensGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<LoginTokensGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof LoginTokensGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], LoginTokensGroupByOutputType[P]>
-            : GetScalarType<T[P], LoginTokensGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type LoginTokensSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    token?: boolean
-    createdAt?: boolean
-    expiresAt?: boolean
-    user?: boolean | UsersDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["loginTokens"]>
-
-  export type LoginTokensSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    token?: boolean
-    createdAt?: boolean
-    expiresAt?: boolean
-    user?: boolean | UsersDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["loginTokens"]>
-
-  export type LoginTokensSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    token?: boolean
-    createdAt?: boolean
-    expiresAt?: boolean
-    user?: boolean | UsersDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["loginTokens"]>
-
-  export type LoginTokensSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    token?: boolean
-    createdAt?: boolean
-    expiresAt?: boolean
-  }
-
-  export type LoginTokensOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "token" | "createdAt" | "expiresAt", ExtArgs["result"]["loginTokens"]>
-  export type LoginTokensInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UsersDefaultArgs<ExtArgs>
-  }
-  export type LoginTokensIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UsersDefaultArgs<ExtArgs>
-  }
-  export type LoginTokensIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UsersDefaultArgs<ExtArgs>
-  }
-
-  export type $LoginTokensPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "LoginTokens"
-    objects: {
-      user: Prisma.$UsersPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      userId: number
-      token: string
-      createdAt: Date
-      expiresAt: Date
-    }, ExtArgs["result"]["loginTokens"]>
-    composites: {}
-  }
-
-  type LoginTokensGetPayload<S extends boolean | null | undefined | LoginTokensDefaultArgs> = $Result.GetResult<Prisma.$LoginTokensPayload, S>
-
-  type LoginTokensCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<LoginTokensFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: LoginTokensCountAggregateInputType | true
-    }
-
-  export interface LoginTokensDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LoginTokens'], meta: { name: 'LoginTokens' } }
-    /**
-     * Find zero or one LoginTokens that matches the filter.
-     * @param {LoginTokensFindUniqueArgs} args - Arguments to find a LoginTokens
-     * @example
-     * // Get one LoginTokens
-     * const loginTokens = await prisma.loginTokens.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends LoginTokensFindUniqueArgs>(args: SelectSubset<T, LoginTokensFindUniqueArgs<ExtArgs>>): Prisma__LoginTokensClient<$Result.GetResult<Prisma.$LoginTokensPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one LoginTokens that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {LoginTokensFindUniqueOrThrowArgs} args - Arguments to find a LoginTokens
-     * @example
-     * // Get one LoginTokens
-     * const loginTokens = await prisma.loginTokens.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends LoginTokensFindUniqueOrThrowArgs>(args: SelectSubset<T, LoginTokensFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LoginTokensClient<$Result.GetResult<Prisma.$LoginTokensPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first LoginTokens that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LoginTokensFindFirstArgs} args - Arguments to find a LoginTokens
-     * @example
-     * // Get one LoginTokens
-     * const loginTokens = await prisma.loginTokens.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends LoginTokensFindFirstArgs>(args?: SelectSubset<T, LoginTokensFindFirstArgs<ExtArgs>>): Prisma__LoginTokensClient<$Result.GetResult<Prisma.$LoginTokensPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first LoginTokens that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LoginTokensFindFirstOrThrowArgs} args - Arguments to find a LoginTokens
-     * @example
-     * // Get one LoginTokens
-     * const loginTokens = await prisma.loginTokens.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends LoginTokensFindFirstOrThrowArgs>(args?: SelectSubset<T, LoginTokensFindFirstOrThrowArgs<ExtArgs>>): Prisma__LoginTokensClient<$Result.GetResult<Prisma.$LoginTokensPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more LoginTokens that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LoginTokensFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all LoginTokens
-     * const loginTokens = await prisma.loginTokens.findMany()
-     * 
-     * // Get first 10 LoginTokens
-     * const loginTokens = await prisma.loginTokens.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const loginTokensWithIdOnly = await prisma.loginTokens.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends LoginTokensFindManyArgs>(args?: SelectSubset<T, LoginTokensFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoginTokensPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a LoginTokens.
-     * @param {LoginTokensCreateArgs} args - Arguments to create a LoginTokens.
-     * @example
-     * // Create one LoginTokens
-     * const LoginTokens = await prisma.loginTokens.create({
-     *   data: {
-     *     // ... data to create a LoginTokens
-     *   }
-     * })
-     * 
-     */
-    create<T extends LoginTokensCreateArgs>(args: SelectSubset<T, LoginTokensCreateArgs<ExtArgs>>): Prisma__LoginTokensClient<$Result.GetResult<Prisma.$LoginTokensPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many LoginTokens.
-     * @param {LoginTokensCreateManyArgs} args - Arguments to create many LoginTokens.
-     * @example
-     * // Create many LoginTokens
-     * const loginTokens = await prisma.loginTokens.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends LoginTokensCreateManyArgs>(args?: SelectSubset<T, LoginTokensCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many LoginTokens and returns the data saved in the database.
-     * @param {LoginTokensCreateManyAndReturnArgs} args - Arguments to create many LoginTokens.
-     * @example
-     * // Create many LoginTokens
-     * const loginTokens = await prisma.loginTokens.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many LoginTokens and only return the `id`
-     * const loginTokensWithIdOnly = await prisma.loginTokens.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends LoginTokensCreateManyAndReturnArgs>(args?: SelectSubset<T, LoginTokensCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoginTokensPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a LoginTokens.
-     * @param {LoginTokensDeleteArgs} args - Arguments to delete one LoginTokens.
-     * @example
-     * // Delete one LoginTokens
-     * const LoginTokens = await prisma.loginTokens.delete({
-     *   where: {
-     *     // ... filter to delete one LoginTokens
-     *   }
-     * })
-     * 
-     */
-    delete<T extends LoginTokensDeleteArgs>(args: SelectSubset<T, LoginTokensDeleteArgs<ExtArgs>>): Prisma__LoginTokensClient<$Result.GetResult<Prisma.$LoginTokensPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one LoginTokens.
-     * @param {LoginTokensUpdateArgs} args - Arguments to update one LoginTokens.
-     * @example
-     * // Update one LoginTokens
-     * const loginTokens = await prisma.loginTokens.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends LoginTokensUpdateArgs>(args: SelectSubset<T, LoginTokensUpdateArgs<ExtArgs>>): Prisma__LoginTokensClient<$Result.GetResult<Prisma.$LoginTokensPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more LoginTokens.
-     * @param {LoginTokensDeleteManyArgs} args - Arguments to filter LoginTokens to delete.
-     * @example
-     * // Delete a few LoginTokens
-     * const { count } = await prisma.loginTokens.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends LoginTokensDeleteManyArgs>(args?: SelectSubset<T, LoginTokensDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more LoginTokens.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LoginTokensUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many LoginTokens
-     * const loginTokens = await prisma.loginTokens.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends LoginTokensUpdateManyArgs>(args: SelectSubset<T, LoginTokensUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more LoginTokens and returns the data updated in the database.
-     * @param {LoginTokensUpdateManyAndReturnArgs} args - Arguments to update many LoginTokens.
-     * @example
-     * // Update many LoginTokens
-     * const loginTokens = await prisma.loginTokens.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more LoginTokens and only return the `id`
-     * const loginTokensWithIdOnly = await prisma.loginTokens.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends LoginTokensUpdateManyAndReturnArgs>(args: SelectSubset<T, LoginTokensUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoginTokensPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one LoginTokens.
-     * @param {LoginTokensUpsertArgs} args - Arguments to update or create a LoginTokens.
-     * @example
-     * // Update or create a LoginTokens
-     * const loginTokens = await prisma.loginTokens.upsert({
-     *   create: {
-     *     // ... data to create a LoginTokens
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the LoginTokens we want to update
-     *   }
-     * })
-     */
-    upsert<T extends LoginTokensUpsertArgs>(args: SelectSubset<T, LoginTokensUpsertArgs<ExtArgs>>): Prisma__LoginTokensClient<$Result.GetResult<Prisma.$LoginTokensPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of LoginTokens.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LoginTokensCountArgs} args - Arguments to filter LoginTokens to count.
-     * @example
-     * // Count the number of LoginTokens
-     * const count = await prisma.loginTokens.count({
-     *   where: {
-     *     // ... the filter for the LoginTokens we want to count
-     *   }
-     * })
-    **/
-    count<T extends LoginTokensCountArgs>(
-      args?: Subset<T, LoginTokensCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], LoginTokensCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a LoginTokens.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LoginTokensAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends LoginTokensAggregateArgs>(args: Subset<T, LoginTokensAggregateArgs>): Prisma.PrismaPromise<GetLoginTokensAggregateType<T>>
-
-    /**
-     * Group by LoginTokens.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LoginTokensGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends LoginTokensGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: LoginTokensGroupByArgs['orderBy'] }
-        : { orderBy?: LoginTokensGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, LoginTokensGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLoginTokensGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the LoginTokens model
-   */
-  readonly fields: LoginTokensFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for LoginTokens.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__LoginTokensClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the LoginTokens model
-   */
-  interface LoginTokensFieldRefs {
-    readonly id: FieldRef<"LoginTokens", 'Int'>
-    readonly userId: FieldRef<"LoginTokens", 'Int'>
-    readonly token: FieldRef<"LoginTokens", 'String'>
-    readonly createdAt: FieldRef<"LoginTokens", 'DateTime'>
-    readonly expiresAt: FieldRef<"LoginTokens", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * LoginTokens findUnique
-   */
-  export type LoginTokensFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensInclude<ExtArgs> | null
-    /**
-     * Filter, which LoginTokens to fetch.
-     */
-    where: LoginTokensWhereUniqueInput
-  }
-
-  /**
-   * LoginTokens findUniqueOrThrow
-   */
-  export type LoginTokensFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensInclude<ExtArgs> | null
-    /**
-     * Filter, which LoginTokens to fetch.
-     */
-    where: LoginTokensWhereUniqueInput
-  }
-
-  /**
-   * LoginTokens findFirst
-   */
-  export type LoginTokensFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensInclude<ExtArgs> | null
-    /**
-     * Filter, which LoginTokens to fetch.
-     */
-    where?: LoginTokensWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of LoginTokens to fetch.
-     */
-    orderBy?: LoginTokensOrderByWithRelationInput | LoginTokensOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for LoginTokens.
-     */
-    cursor?: LoginTokensWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` LoginTokens from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` LoginTokens.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of LoginTokens.
-     */
-    distinct?: LoginTokensScalarFieldEnum | LoginTokensScalarFieldEnum[]
-  }
-
-  /**
-   * LoginTokens findFirstOrThrow
-   */
-  export type LoginTokensFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensInclude<ExtArgs> | null
-    /**
-     * Filter, which LoginTokens to fetch.
-     */
-    where?: LoginTokensWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of LoginTokens to fetch.
-     */
-    orderBy?: LoginTokensOrderByWithRelationInput | LoginTokensOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for LoginTokens.
-     */
-    cursor?: LoginTokensWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` LoginTokens from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` LoginTokens.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of LoginTokens.
-     */
-    distinct?: LoginTokensScalarFieldEnum | LoginTokensScalarFieldEnum[]
-  }
-
-  /**
-   * LoginTokens findMany
-   */
-  export type LoginTokensFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensInclude<ExtArgs> | null
-    /**
-     * Filter, which LoginTokens to fetch.
-     */
-    where?: LoginTokensWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of LoginTokens to fetch.
-     */
-    orderBy?: LoginTokensOrderByWithRelationInput | LoginTokensOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing LoginTokens.
-     */
-    cursor?: LoginTokensWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` LoginTokens from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` LoginTokens.
-     */
-    skip?: number
-    distinct?: LoginTokensScalarFieldEnum | LoginTokensScalarFieldEnum[]
-  }
-
-  /**
-   * LoginTokens create
-   */
-  export type LoginTokensCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensInclude<ExtArgs> | null
-    /**
-     * The data needed to create a LoginTokens.
-     */
-    data: XOR<LoginTokensCreateInput, LoginTokensUncheckedCreateInput>
-  }
-
-  /**
-   * LoginTokens createMany
-   */
-  export type LoginTokensCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many LoginTokens.
-     */
-    data: LoginTokensCreateManyInput | LoginTokensCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * LoginTokens createManyAndReturn
-   */
-  export type LoginTokensCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * The data used to create many LoginTokens.
-     */
-    data: LoginTokensCreateManyInput | LoginTokensCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * LoginTokens update
-   */
-  export type LoginTokensUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensInclude<ExtArgs> | null
-    /**
-     * The data needed to update a LoginTokens.
-     */
-    data: XOR<LoginTokensUpdateInput, LoginTokensUncheckedUpdateInput>
-    /**
-     * Choose, which LoginTokens to update.
-     */
-    where: LoginTokensWhereUniqueInput
-  }
-
-  /**
-   * LoginTokens updateMany
-   */
-  export type LoginTokensUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update LoginTokens.
-     */
-    data: XOR<LoginTokensUpdateManyMutationInput, LoginTokensUncheckedUpdateManyInput>
-    /**
-     * Filter which LoginTokens to update
-     */
-    where?: LoginTokensWhereInput
-    /**
-     * Limit how many LoginTokens to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * LoginTokens updateManyAndReturn
-   */
-  export type LoginTokensUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * The data used to update LoginTokens.
-     */
-    data: XOR<LoginTokensUpdateManyMutationInput, LoginTokensUncheckedUpdateManyInput>
-    /**
-     * Filter which LoginTokens to update
-     */
-    where?: LoginTokensWhereInput
-    /**
-     * Limit how many LoginTokens to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * LoginTokens upsert
-   */
-  export type LoginTokensUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensInclude<ExtArgs> | null
-    /**
-     * The filter to search for the LoginTokens to update in case it exists.
-     */
-    where: LoginTokensWhereUniqueInput
-    /**
-     * In case the LoginTokens found by the `where` argument doesn't exist, create a new LoginTokens with this data.
-     */
-    create: XOR<LoginTokensCreateInput, LoginTokensUncheckedCreateInput>
-    /**
-     * In case the LoginTokens was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<LoginTokensUpdateInput, LoginTokensUncheckedUpdateInput>
-  }
-
-  /**
-   * LoginTokens delete
-   */
-  export type LoginTokensDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensInclude<ExtArgs> | null
-    /**
-     * Filter which LoginTokens to delete.
-     */
-    where: LoginTokensWhereUniqueInput
-  }
-
-  /**
-   * LoginTokens deleteMany
-   */
-  export type LoginTokensDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which LoginTokens to delete
-     */
-    where?: LoginTokensWhereInput
-    /**
-     * Limit how many LoginTokens to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * LoginTokens without action
-   */
-  export type LoginTokensDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LoginTokens
-     */
-    select?: LoginTokensSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LoginTokens
-     */
-    omit?: LoginTokensOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LoginTokensInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Movies
    */
 
@@ -4329,6 +3144,7 @@ export namespace Prisma {
     rating: number | null
     releaseDate: Date | null
     created_at: Date | null
+    updated_at: Date | null
   }
 
   export type MoviesMaxAggregateOutputType = {
@@ -4342,6 +3158,7 @@ export namespace Prisma {
     rating: number | null
     releaseDate: Date | null
     created_at: Date | null
+    updated_at: Date | null
   }
 
   export type MoviesCountAggregateOutputType = {
@@ -4355,6 +3172,7 @@ export namespace Prisma {
     rating: number
     releaseDate: number
     created_at: number
+    updated_at: number
     _all: number
   }
 
@@ -4384,6 +3202,7 @@ export namespace Prisma {
     rating?: true
     releaseDate?: true
     created_at?: true
+    updated_at?: true
   }
 
   export type MoviesMaxAggregateInputType = {
@@ -4397,6 +3216,7 @@ export namespace Prisma {
     rating?: true
     releaseDate?: true
     created_at?: true
+    updated_at?: true
   }
 
   export type MoviesCountAggregateInputType = {
@@ -4410,6 +3230,7 @@ export namespace Prisma {
     rating?: true
     releaseDate?: true
     created_at?: true
+    updated_at?: true
     _all?: true
   }
 
@@ -4510,6 +3331,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date
     created_at: Date
+    updated_at: Date
     _count: MoviesCountAggregateOutputType | null
     _avg: MoviesAvgAggregateOutputType | null
     _sum: MoviesSumAggregateOutputType | null
@@ -4542,6 +3364,7 @@ export namespace Prisma {
     rating?: boolean
     releaseDate?: boolean
     created_at?: boolean
+    updated_at?: boolean
     categories?: boolean | Movies$categoriesArgs<ExtArgs>
     reviews?: boolean | Movies$reviewsArgs<ExtArgs>
     bookmarks?: boolean | Movies$bookmarksArgs<ExtArgs>
@@ -4561,6 +3384,7 @@ export namespace Prisma {
     rating?: boolean
     releaseDate?: boolean
     created_at?: boolean
+    updated_at?: boolean
   }, ExtArgs["result"]["movies"]>
 
   export type MoviesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4574,6 +3398,7 @@ export namespace Prisma {
     rating?: boolean
     releaseDate?: boolean
     created_at?: boolean
+    updated_at?: boolean
   }, ExtArgs["result"]["movies"]>
 
   export type MoviesSelectScalar = {
@@ -4587,9 +3412,10 @@ export namespace Prisma {
     rating?: boolean
     releaseDate?: boolean
     created_at?: boolean
+    updated_at?: boolean
   }
 
-  export type MoviesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "release_year" | "imageUrl" | "posterUrl" | "duration" | "rating" | "releaseDate" | "created_at", ExtArgs["result"]["movies"]>
+  export type MoviesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "release_year" | "imageUrl" | "posterUrl" | "duration" | "rating" | "releaseDate" | "created_at" | "updated_at", ExtArgs["result"]["movies"]>
   export type MoviesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     categories?: boolean | Movies$categoriesArgs<ExtArgs>
     reviews?: boolean | Movies$reviewsArgs<ExtArgs>
@@ -4621,6 +3447,7 @@ export namespace Prisma {
       rating: number
       releaseDate: Date
       created_at: Date
+      updated_at: Date
     }, ExtArgs["result"]["movies"]>
     composites: {}
   }
@@ -5059,6 +3886,7 @@ export namespace Prisma {
     readonly rating: FieldRef<"Movies", 'Float'>
     readonly releaseDate: FieldRef<"Movies", 'DateTime'>
     readonly created_at: FieldRef<"Movies", 'DateTime'>
+    readonly updated_at: FieldRef<"Movies", 'DateTime'>
   }
     
 
@@ -14287,24 +13115,16 @@ export namespace Prisma {
 
   export const UsersScalarFieldEnum: {
     id: 'id',
-    username: 'username',
     email: 'email',
-    password_hash: 'password_hash',
-    created_at: 'created_at'
+    username: 'username',
+    password: 'password',
+    role: 'role',
+    created_at: 'created_at',
+    provider: 'provider',
+    providerId: 'providerId'
   };
 
   export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
-
-
-  export const LoginTokensScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    token: 'token',
-    createdAt: 'createdAt',
-    expiresAt: 'expiresAt'
-  };
-
-  export type LoginTokensScalarFieldEnum = (typeof LoginTokensScalarFieldEnum)[keyof typeof LoginTokensScalarFieldEnum]
 
 
   export const MoviesScalarFieldEnum: {
@@ -14317,7 +13137,8 @@ export namespace Prisma {
     duration: 'duration',
     rating: 'rating',
     releaseDate: 'releaseDate',
-    created_at: 'created_at'
+    created_at: 'created_at',
+    updated_at: 'updated_at'
   };
 
   export type MoviesScalarFieldEnum = (typeof MoviesScalarFieldEnum)[keyof typeof MoviesScalarFieldEnum]
@@ -14491,11 +13312,13 @@ export namespace Prisma {
     OR?: UsersWhereInput[]
     NOT?: UsersWhereInput | UsersWhereInput[]
     id?: IntFilter<"Users"> | number
-    username?: StringFilter<"Users"> | string
     email?: StringFilter<"Users"> | string
-    password_hash?: StringFilter<"Users"> | string
+    username?: StringFilter<"Users"> | string
+    password?: StringFilter<"Users"> | string
+    role?: StringFilter<"Users"> | string
     created_at?: DateTimeFilter<"Users"> | Date | string
-    tokens?: LoginTokensListRelationFilter
+    provider?: StringNullableFilter<"Users"> | string | null
+    providerId?: StringNullableFilter<"Users"> | string | null
     reviews?: ReviewsListRelationFilter
     bookmarks?: BookmarkedMoviesListRelationFilter
     watchedMovies?: WatchedMoviesListRelationFilter
@@ -14505,11 +13328,13 @@ export namespace Prisma {
 
   export type UsersOrderByWithRelationInput = {
     id?: SortOrder
-    username?: SortOrder
     email?: SortOrder
-    password_hash?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    role?: SortOrder
     created_at?: SortOrder
-    tokens?: LoginTokensOrderByRelationAggregateInput
+    provider?: SortOrderInput | SortOrder
+    providerId?: SortOrderInput | SortOrder
     reviews?: ReviewsOrderByRelationAggregateInput
     bookmarks?: BookmarkedMoviesOrderByRelationAggregateInput
     watchedMovies?: WatchedMoviesOrderByRelationAggregateInput
@@ -14519,27 +13344,32 @@ export namespace Prisma {
 
   export type UsersWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    username?: string
     email?: string
+    username?: string
     AND?: UsersWhereInput | UsersWhereInput[]
     OR?: UsersWhereInput[]
     NOT?: UsersWhereInput | UsersWhereInput[]
-    password_hash?: StringFilter<"Users"> | string
+    password?: StringFilter<"Users"> | string
+    role?: StringFilter<"Users"> | string
     created_at?: DateTimeFilter<"Users"> | Date | string
-    tokens?: LoginTokensListRelationFilter
+    provider?: StringNullableFilter<"Users"> | string | null
+    providerId?: StringNullableFilter<"Users"> | string | null
     reviews?: ReviewsListRelationFilter
     bookmarks?: BookmarkedMoviesListRelationFilter
     watchedMovies?: WatchedMoviesListRelationFilter
     followers?: FollowersListRelationFilter
     following?: FollowersListRelationFilter
-  }, "id" | "username" | "email">
+  }, "id" | "email" | "username">
 
   export type UsersOrderByWithAggregationInput = {
     id?: SortOrder
-    username?: SortOrder
     email?: SortOrder
-    password_hash?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    role?: SortOrder
     created_at?: SortOrder
+    provider?: SortOrderInput | SortOrder
+    providerId?: SortOrderInput | SortOrder
     _count?: UsersCountOrderByAggregateInput
     _avg?: UsersAvgOrderByAggregateInput
     _max?: UsersMaxOrderByAggregateInput
@@ -14552,67 +13382,13 @@ export namespace Prisma {
     OR?: UsersScalarWhereWithAggregatesInput[]
     NOT?: UsersScalarWhereWithAggregatesInput | UsersScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Users"> | number
-    username?: StringWithAggregatesFilter<"Users"> | string
     email?: StringWithAggregatesFilter<"Users"> | string
-    password_hash?: StringWithAggregatesFilter<"Users"> | string
+    username?: StringWithAggregatesFilter<"Users"> | string
+    password?: StringWithAggregatesFilter<"Users"> | string
+    role?: StringWithAggregatesFilter<"Users"> | string
     created_at?: DateTimeWithAggregatesFilter<"Users"> | Date | string
-  }
-
-  export type LoginTokensWhereInput = {
-    AND?: LoginTokensWhereInput | LoginTokensWhereInput[]
-    OR?: LoginTokensWhereInput[]
-    NOT?: LoginTokensWhereInput | LoginTokensWhereInput[]
-    id?: IntFilter<"LoginTokens"> | number
-    userId?: IntFilter<"LoginTokens"> | number
-    token?: StringFilter<"LoginTokens"> | string
-    createdAt?: DateTimeFilter<"LoginTokens"> | Date | string
-    expiresAt?: DateTimeFilter<"LoginTokens"> | Date | string
-    user?: XOR<UsersScalarRelationFilter, UsersWhereInput>
-  }
-
-  export type LoginTokensOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    token?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-    user?: UsersOrderByWithRelationInput
-  }
-
-  export type LoginTokensWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: LoginTokensWhereInput | LoginTokensWhereInput[]
-    OR?: LoginTokensWhereInput[]
-    NOT?: LoginTokensWhereInput | LoginTokensWhereInput[]
-    userId?: IntFilter<"LoginTokens"> | number
-    token?: StringFilter<"LoginTokens"> | string
-    createdAt?: DateTimeFilter<"LoginTokens"> | Date | string
-    expiresAt?: DateTimeFilter<"LoginTokens"> | Date | string
-    user?: XOR<UsersScalarRelationFilter, UsersWhereInput>
-  }, "id">
-
-  export type LoginTokensOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    token?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-    _count?: LoginTokensCountOrderByAggregateInput
-    _avg?: LoginTokensAvgOrderByAggregateInput
-    _max?: LoginTokensMaxOrderByAggregateInput
-    _min?: LoginTokensMinOrderByAggregateInput
-    _sum?: LoginTokensSumOrderByAggregateInput
-  }
-
-  export type LoginTokensScalarWhereWithAggregatesInput = {
-    AND?: LoginTokensScalarWhereWithAggregatesInput | LoginTokensScalarWhereWithAggregatesInput[]
-    OR?: LoginTokensScalarWhereWithAggregatesInput[]
-    NOT?: LoginTokensScalarWhereWithAggregatesInput | LoginTokensScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"LoginTokens"> | number
-    userId?: IntWithAggregatesFilter<"LoginTokens"> | number
-    token?: StringWithAggregatesFilter<"LoginTokens"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"LoginTokens"> | Date | string
-    expiresAt?: DateTimeWithAggregatesFilter<"LoginTokens"> | Date | string
+    provider?: StringNullableWithAggregatesFilter<"Users"> | string | null
+    providerId?: StringNullableWithAggregatesFilter<"Users"> | string | null
   }
 
   export type MoviesWhereInput = {
@@ -14629,6 +13405,7 @@ export namespace Prisma {
     rating?: FloatFilter<"Movies"> | number
     releaseDate?: DateTimeFilter<"Movies"> | Date | string
     created_at?: DateTimeFilter<"Movies"> | Date | string
+    updated_at?: DateTimeFilter<"Movies"> | Date | string
     categories?: MoviesCategoriesListRelationFilter
     reviews?: ReviewsListRelationFilter
     bookmarks?: BookmarkedMoviesListRelationFilter
@@ -14647,6 +13424,7 @@ export namespace Prisma {
     rating?: SortOrder
     releaseDate?: SortOrder
     created_at?: SortOrder
+    updated_at?: SortOrder
     categories?: MoviesCategoriesOrderByRelationAggregateInput
     reviews?: ReviewsOrderByRelationAggregateInput
     bookmarks?: BookmarkedMoviesOrderByRelationAggregateInput
@@ -14668,6 +13446,7 @@ export namespace Prisma {
     rating?: FloatFilter<"Movies"> | number
     releaseDate?: DateTimeFilter<"Movies"> | Date | string
     created_at?: DateTimeFilter<"Movies"> | Date | string
+    updated_at?: DateTimeFilter<"Movies"> | Date | string
     categories?: MoviesCategoriesListRelationFilter
     reviews?: ReviewsListRelationFilter
     bookmarks?: BookmarkedMoviesListRelationFilter
@@ -14686,6 +13465,7 @@ export namespace Prisma {
     rating?: SortOrder
     releaseDate?: SortOrder
     created_at?: SortOrder
+    updated_at?: SortOrder
     _count?: MoviesCountOrderByAggregateInput
     _avg?: MoviesAvgOrderByAggregateInput
     _max?: MoviesMaxOrderByAggregateInput
@@ -14707,6 +13487,7 @@ export namespace Prisma {
     rating?: FloatWithAggregatesFilter<"Movies"> | number
     releaseDate?: DateTimeWithAggregatesFilter<"Movies"> | Date | string
     created_at?: DateTimeWithAggregatesFilter<"Movies"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Movies"> | Date | string
   }
 
   export type CategoriesWhereInput = {
@@ -15123,11 +13904,13 @@ export namespace Prisma {
   }
 
   export type UsersCreateInput = {
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
-    tokens?: LoginTokensCreateNestedManyWithoutUserInput
+    provider?: string | null
+    providerId?: string | null
     reviews?: ReviewsCreateNestedManyWithoutUserInput
     bookmarks?: BookmarkedMoviesCreateNestedManyWithoutUserInput
     watchedMovies?: WatchedMoviesCreateNestedManyWithoutUserInput
@@ -15137,11 +13920,13 @@ export namespace Prisma {
 
   export type UsersUncheckedCreateInput = {
     id?: number
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
-    tokens?: LoginTokensUncheckedCreateNestedManyWithoutUserInput
+    provider?: string | null
+    providerId?: string | null
     reviews?: ReviewsUncheckedCreateNestedManyWithoutUserInput
     bookmarks?: BookmarkedMoviesUncheckedCreateNestedManyWithoutUserInput
     watchedMovies?: WatchedMoviesUncheckedCreateNestedManyWithoutUserInput
@@ -15150,11 +13935,13 @@ export namespace Prisma {
   }
 
   export type UsersUpdateInput = {
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tokens?: LoginTokensUpdateManyWithoutUserNestedInput
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: ReviewsUpdateManyWithoutUserNestedInput
     bookmarks?: BookmarkedMoviesUpdateManyWithoutUserNestedInput
     watchedMovies?: WatchedMoviesUpdateManyWithoutUserNestedInput
@@ -15164,11 +13951,13 @@ export namespace Prisma {
 
   export type UsersUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tokens?: LoginTokensUncheckedUpdateManyWithoutUserNestedInput
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: ReviewsUncheckedUpdateManyWithoutUserNestedInput
     bookmarks?: BookmarkedMoviesUncheckedUpdateManyWithoutUserNestedInput
     watchedMovies?: WatchedMoviesUncheckedUpdateManyWithoutUserNestedInput
@@ -15178,77 +13967,34 @@ export namespace Prisma {
 
   export type UsersCreateManyInput = {
     id?: number
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
+    provider?: string | null
+    providerId?: string | null
   }
 
   export type UsersUpdateManyMutationInput = {
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UsersUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LoginTokensCreateInput = {
-    token: string
-    createdAt?: Date | string
-    expiresAt: Date | string
-    user: UsersCreateNestedOneWithoutTokensInput
-  }
-
-  export type LoginTokensUncheckedCreateInput = {
-    id?: number
-    userId: number
-    token: string
-    createdAt?: Date | string
-    expiresAt: Date | string
-  }
-
-  export type LoginTokensUpdateInput = {
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UsersUpdateOneRequiredWithoutTokensNestedInput
-  }
-
-  export type LoginTokensUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LoginTokensCreateManyInput = {
-    id?: number
-    userId: number
-    token: string
-    createdAt?: Date | string
-    expiresAt: Date | string
-  }
-
-  export type LoginTokensUpdateManyMutationInput = {
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LoginTokensUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MoviesCreateInput = {
@@ -15261,6 +14007,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
     categories?: MoviesCategoriesCreateNestedManyWithoutMovieInput
     reviews?: ReviewsCreateNestedManyWithoutMovieInput
     bookmarks?: BookmarkedMoviesCreateNestedManyWithoutMovieInput
@@ -15279,6 +14026,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
     categories?: MoviesCategoriesUncheckedCreateNestedManyWithoutMovieInput
     reviews?: ReviewsUncheckedCreateNestedManyWithoutMovieInput
     bookmarks?: BookmarkedMoviesUncheckedCreateNestedManyWithoutMovieInput
@@ -15296,6 +14044,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: MoviesCategoriesUpdateManyWithoutMovieNestedInput
     reviews?: ReviewsUpdateManyWithoutMovieNestedInput
     bookmarks?: BookmarkedMoviesUpdateManyWithoutMovieNestedInput
@@ -15314,6 +14063,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: MoviesCategoriesUncheckedUpdateManyWithoutMovieNestedInput
     reviews?: ReviewsUncheckedUpdateManyWithoutMovieNestedInput
     bookmarks?: BookmarkedMoviesUncheckedUpdateManyWithoutMovieNestedInput
@@ -15332,6 +14082,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
   }
 
   export type MoviesUpdateManyMutationInput = {
@@ -15344,6 +14095,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MoviesUncheckedUpdateManyInput = {
@@ -15357,6 +14109,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoriesCreateInput = {
@@ -15739,10 +14492,19 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type LoginTokensListRelationFilter = {
-    every?: LoginTokensWhereInput
-    some?: LoginTokensWhereInput
-    none?: LoginTokensWhereInput
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type ReviewsListRelationFilter = {
@@ -15769,8 +14531,9 @@ export namespace Prisma {
     none?: FollowersWhereInput
   }
 
-  export type LoginTokensOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type ReviewsOrderByRelationAggregateInput = {
@@ -15791,10 +14554,13 @@ export namespace Prisma {
 
   export type UsersCountOrderByAggregateInput = {
     id?: SortOrder
-    username?: SortOrder
     email?: SortOrder
-    password_hash?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    role?: SortOrder
     created_at?: SortOrder
+    provider?: SortOrder
+    providerId?: SortOrder
   }
 
   export type UsersAvgOrderByAggregateInput = {
@@ -15803,18 +14569,24 @@ export namespace Prisma {
 
   export type UsersMaxOrderByAggregateInput = {
     id?: SortOrder
-    username?: SortOrder
     email?: SortOrder
-    password_hash?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    role?: SortOrder
     created_at?: SortOrder
+    provider?: SortOrder
+    providerId?: SortOrder
   }
 
   export type UsersMinOrderByAggregateInput = {
     id?: SortOrder
-    username?: SortOrder
     email?: SortOrder
-    password_hash?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    role?: SortOrder
     created_at?: SortOrder
+    provider?: SortOrder
+    providerId?: SortOrder
   }
 
   export type UsersSumOrderByAggregateInput = {
@@ -15869,46 +14641,7 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type UsersScalarRelationFilter = {
-    is?: UsersWhereInput
-    isNot?: UsersWhereInput
-  }
-
-  export type LoginTokensCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    token?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-  }
-
-  export type LoginTokensAvgOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type LoginTokensMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    token?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-  }
-
-  export type LoginTokensMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    token?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
-  }
-
-  export type LoginTokensSumOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -15920,7 +14653,10 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -15945,11 +14681,6 @@ export namespace Prisma {
     isNot?: FeaturedMovieWhereInput | null
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type MoviesCategoriesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -15965,6 +14696,7 @@ export namespace Prisma {
     rating?: SortOrder
     releaseDate?: SortOrder
     created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type MoviesAvgOrderByAggregateInput = {
@@ -15985,6 +14717,7 @@ export namespace Prisma {
     rating?: SortOrder
     releaseDate?: SortOrder
     created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type MoviesMinOrderByAggregateInput = {
@@ -15998,6 +14731,7 @@ export namespace Prisma {
     rating?: SortOrder
     releaseDate?: SortOrder
     created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type MoviesSumOrderByAggregateInput = {
@@ -16005,24 +14739,6 @@ export namespace Prisma {
     release_year?: SortOrder
     duration?: SortOrder
     rating?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -16183,6 +14899,11 @@ export namespace Prisma {
     movieLimit?: SortOrder
   }
 
+  export type UsersScalarRelationFilter = {
+    is?: UsersWhereInput
+    isNot?: UsersWhereInput
+  }
+
   export type ReviewsCountOrderByAggregateInput = {
     id?: SortOrder
     movieId?: SortOrder
@@ -16320,13 +15041,6 @@ export namespace Prisma {
     followerId?: SortOrder
   }
 
-  export type LoginTokensCreateNestedManyWithoutUserInput = {
-    create?: XOR<LoginTokensCreateWithoutUserInput, LoginTokensUncheckedCreateWithoutUserInput> | LoginTokensCreateWithoutUserInput[] | LoginTokensUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: LoginTokensCreateOrConnectWithoutUserInput | LoginTokensCreateOrConnectWithoutUserInput[]
-    createMany?: LoginTokensCreateManyUserInputEnvelope
-    connect?: LoginTokensWhereUniqueInput | LoginTokensWhereUniqueInput[]
-  }
-
   export type ReviewsCreateNestedManyWithoutUserInput = {
     create?: XOR<ReviewsCreateWithoutUserInput, ReviewsUncheckedCreateWithoutUserInput> | ReviewsCreateWithoutUserInput[] | ReviewsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ReviewsCreateOrConnectWithoutUserInput | ReviewsCreateOrConnectWithoutUserInput[]
@@ -16360,13 +15074,6 @@ export namespace Prisma {
     connectOrCreate?: FollowersCreateOrConnectWithoutUserInput | FollowersCreateOrConnectWithoutUserInput[]
     createMany?: FollowersCreateManyUserInputEnvelope
     connect?: FollowersWhereUniqueInput | FollowersWhereUniqueInput[]
-  }
-
-  export type LoginTokensUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<LoginTokensCreateWithoutUserInput, LoginTokensUncheckedCreateWithoutUserInput> | LoginTokensCreateWithoutUserInput[] | LoginTokensUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: LoginTokensCreateOrConnectWithoutUserInput | LoginTokensCreateOrConnectWithoutUserInput[]
-    createMany?: LoginTokensCreateManyUserInputEnvelope
-    connect?: LoginTokensWhereUniqueInput | LoginTokensWhereUniqueInput[]
   }
 
   export type ReviewsUncheckedCreateNestedManyWithoutUserInput = {
@@ -16412,18 +15119,8 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type LoginTokensUpdateManyWithoutUserNestedInput = {
-    create?: XOR<LoginTokensCreateWithoutUserInput, LoginTokensUncheckedCreateWithoutUserInput> | LoginTokensCreateWithoutUserInput[] | LoginTokensUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: LoginTokensCreateOrConnectWithoutUserInput | LoginTokensCreateOrConnectWithoutUserInput[]
-    upsert?: LoginTokensUpsertWithWhereUniqueWithoutUserInput | LoginTokensUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: LoginTokensCreateManyUserInputEnvelope
-    set?: LoginTokensWhereUniqueInput | LoginTokensWhereUniqueInput[]
-    disconnect?: LoginTokensWhereUniqueInput | LoginTokensWhereUniqueInput[]
-    delete?: LoginTokensWhereUniqueInput | LoginTokensWhereUniqueInput[]
-    connect?: LoginTokensWhereUniqueInput | LoginTokensWhereUniqueInput[]
-    update?: LoginTokensUpdateWithWhereUniqueWithoutUserInput | LoginTokensUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: LoginTokensUpdateManyWithWhereWithoutUserInput | LoginTokensUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: LoginTokensScalarWhereInput | LoginTokensScalarWhereInput[]
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type ReviewsUpdateManyWithoutUserNestedInput = {
@@ -16504,20 +15201,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type LoginTokensUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<LoginTokensCreateWithoutUserInput, LoginTokensUncheckedCreateWithoutUserInput> | LoginTokensCreateWithoutUserInput[] | LoginTokensUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: LoginTokensCreateOrConnectWithoutUserInput | LoginTokensCreateOrConnectWithoutUserInput[]
-    upsert?: LoginTokensUpsertWithWhereUniqueWithoutUserInput | LoginTokensUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: LoginTokensCreateManyUserInputEnvelope
-    set?: LoginTokensWhereUniqueInput | LoginTokensWhereUniqueInput[]
-    disconnect?: LoginTokensWhereUniqueInput | LoginTokensWhereUniqueInput[]
-    delete?: LoginTokensWhereUniqueInput | LoginTokensWhereUniqueInput[]
-    connect?: LoginTokensWhereUniqueInput | LoginTokensWhereUniqueInput[]
-    update?: LoginTokensUpdateWithWhereUniqueWithoutUserInput | LoginTokensUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: LoginTokensUpdateManyWithWhereWithoutUserInput | LoginTokensUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: LoginTokensScalarWhereInput | LoginTokensScalarWhereInput[]
-  }
-
   export type ReviewsUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ReviewsCreateWithoutUserInput, ReviewsUncheckedCreateWithoutUserInput> | ReviewsCreateWithoutUserInput[] | ReviewsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ReviewsCreateOrConnectWithoutUserInput | ReviewsCreateOrConnectWithoutUserInput[]
@@ -16588,20 +15271,6 @@ export namespace Prisma {
     deleteMany?: FollowersScalarWhereInput | FollowersScalarWhereInput[]
   }
 
-  export type UsersCreateNestedOneWithoutTokensInput = {
-    create?: XOR<UsersCreateWithoutTokensInput, UsersUncheckedCreateWithoutTokensInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutTokensInput
-    connect?: UsersWhereUniqueInput
-  }
-
-  export type UsersUpdateOneRequiredWithoutTokensNestedInput = {
-    create?: XOR<UsersCreateWithoutTokensInput, UsersUncheckedCreateWithoutTokensInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutTokensInput
-    upsert?: UsersUpsertWithoutTokensInput
-    connect?: UsersWhereUniqueInput
-    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutTokensInput, UsersUpdateWithoutTokensInput>, UsersUncheckedUpdateWithoutTokensInput>
-  }
-
   export type MoviesCategoriesCreateNestedManyWithoutMovieInput = {
     create?: XOR<MoviesCategoriesCreateWithoutMovieInput, MoviesCategoriesUncheckedCreateWithoutMovieInput> | MoviesCategoriesCreateWithoutMovieInput[] | MoviesCategoriesUncheckedCreateWithoutMovieInput[]
     connectOrCreate?: MoviesCategoriesCreateOrConnectWithoutMovieInput | MoviesCategoriesCreateOrConnectWithoutMovieInput[]
@@ -16668,10 +15337,6 @@ export namespace Prisma {
     create?: XOR<FeaturedMovieCreateWithoutMovieInput, FeaturedMovieUncheckedCreateWithoutMovieInput>
     connectOrCreate?: FeaturedMovieCreateOrConnectWithoutMovieInput
     connect?: FeaturedMovieWhereUniqueInput
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -17102,6 +15767,20 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -17160,20 +15839,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -17216,29 +15881,6 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type LoginTokensCreateWithoutUserInput = {
-    token: string
-    createdAt?: Date | string
-    expiresAt: Date | string
-  }
-
-  export type LoginTokensUncheckedCreateWithoutUserInput = {
-    id?: number
-    token: string
-    createdAt?: Date | string
-    expiresAt: Date | string
-  }
-
-  export type LoginTokensCreateOrConnectWithoutUserInput = {
-    where: LoginTokensWhereUniqueInput
-    create: XOR<LoginTokensCreateWithoutUserInput, LoginTokensUncheckedCreateWithoutUserInput>
-  }
-
-  export type LoginTokensCreateManyUserInputEnvelope = {
-    data: LoginTokensCreateManyUserInput | LoginTokensCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type ReviewsCreateWithoutUserInput = {
@@ -17340,33 +15982,6 @@ export namespace Prisma {
   export type FollowersCreateManyUserInputEnvelope = {
     data: FollowersCreateManyUserInput | FollowersCreateManyUserInput[]
     skipDuplicates?: boolean
-  }
-
-  export type LoginTokensUpsertWithWhereUniqueWithoutUserInput = {
-    where: LoginTokensWhereUniqueInput
-    update: XOR<LoginTokensUpdateWithoutUserInput, LoginTokensUncheckedUpdateWithoutUserInput>
-    create: XOR<LoginTokensCreateWithoutUserInput, LoginTokensUncheckedCreateWithoutUserInput>
-  }
-
-  export type LoginTokensUpdateWithWhereUniqueWithoutUserInput = {
-    where: LoginTokensWhereUniqueInput
-    data: XOR<LoginTokensUpdateWithoutUserInput, LoginTokensUncheckedUpdateWithoutUserInput>
-  }
-
-  export type LoginTokensUpdateManyWithWhereWithoutUserInput = {
-    where: LoginTokensScalarWhereInput
-    data: XOR<LoginTokensUpdateManyMutationInput, LoginTokensUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type LoginTokensScalarWhereInput = {
-    AND?: LoginTokensScalarWhereInput | LoginTokensScalarWhereInput[]
-    OR?: LoginTokensScalarWhereInput[]
-    NOT?: LoginTokensScalarWhereInput | LoginTokensScalarWhereInput[]
-    id?: IntFilter<"LoginTokens"> | number
-    userId?: IntFilter<"LoginTokens"> | number
-    token?: StringFilter<"LoginTokens"> | string
-    createdAt?: DateTimeFilter<"LoginTokens"> | Date | string
-    expiresAt?: DateTimeFilter<"LoginTokens"> | Date | string
   }
 
   export type ReviewsUpsertWithWhereUniqueWithoutUserInput = {
@@ -17485,72 +16100,6 @@ export namespace Prisma {
   export type FollowersUpdateManyWithWhereWithoutUserInput = {
     where: FollowersScalarWhereInput
     data: XOR<FollowersUpdateManyMutationInput, FollowersUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type UsersCreateWithoutTokensInput = {
-    username: string
-    email: string
-    password_hash: string
-    created_at?: Date | string
-    reviews?: ReviewsCreateNestedManyWithoutUserInput
-    bookmarks?: BookmarkedMoviesCreateNestedManyWithoutUserInput
-    watchedMovies?: WatchedMoviesCreateNestedManyWithoutUserInput
-    followers?: FollowersCreateNestedManyWithoutFollowerInput
-    following?: FollowersCreateNestedManyWithoutUserInput
-  }
-
-  export type UsersUncheckedCreateWithoutTokensInput = {
-    id?: number
-    username: string
-    email: string
-    password_hash: string
-    created_at?: Date | string
-    reviews?: ReviewsUncheckedCreateNestedManyWithoutUserInput
-    bookmarks?: BookmarkedMoviesUncheckedCreateNestedManyWithoutUserInput
-    watchedMovies?: WatchedMoviesUncheckedCreateNestedManyWithoutUserInput
-    followers?: FollowersUncheckedCreateNestedManyWithoutFollowerInput
-    following?: FollowersUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UsersCreateOrConnectWithoutTokensInput = {
-    where: UsersWhereUniqueInput
-    create: XOR<UsersCreateWithoutTokensInput, UsersUncheckedCreateWithoutTokensInput>
-  }
-
-  export type UsersUpsertWithoutTokensInput = {
-    update: XOR<UsersUpdateWithoutTokensInput, UsersUncheckedUpdateWithoutTokensInput>
-    create: XOR<UsersCreateWithoutTokensInput, UsersUncheckedCreateWithoutTokensInput>
-    where?: UsersWhereInput
-  }
-
-  export type UsersUpdateToOneWithWhereWithoutTokensInput = {
-    where?: UsersWhereInput
-    data: XOR<UsersUpdateWithoutTokensInput, UsersUncheckedUpdateWithoutTokensInput>
-  }
-
-  export type UsersUpdateWithoutTokensInput = {
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviews?: ReviewsUpdateManyWithoutUserNestedInput
-    bookmarks?: BookmarkedMoviesUpdateManyWithoutUserNestedInput
-    watchedMovies?: WatchedMoviesUpdateManyWithoutUserNestedInput
-    followers?: FollowersUpdateManyWithoutFollowerNestedInput
-    following?: FollowersUpdateManyWithoutUserNestedInput
-  }
-
-  export type UsersUncheckedUpdateWithoutTokensInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviews?: ReviewsUncheckedUpdateManyWithoutUserNestedInput
-    bookmarks?: BookmarkedMoviesUncheckedUpdateManyWithoutUserNestedInput
-    watchedMovies?: WatchedMoviesUncheckedUpdateManyWithoutUserNestedInput
-    followers?: FollowersUncheckedUpdateManyWithoutFollowerNestedInput
-    following?: FollowersUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MoviesCategoriesCreateWithoutMovieInput = {
@@ -17836,6 +16385,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
     reviews?: ReviewsCreateNestedManyWithoutMovieInput
     bookmarks?: BookmarkedMoviesCreateNestedManyWithoutMovieInput
     watchedMovies?: WatchedMoviesCreateNestedManyWithoutMovieInput
@@ -17853,6 +16403,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
     reviews?: ReviewsUncheckedCreateNestedManyWithoutMovieInput
     bookmarks?: BookmarkedMoviesUncheckedCreateNestedManyWithoutMovieInput
     watchedMovies?: WatchedMoviesUncheckedCreateNestedManyWithoutMovieInput
@@ -17903,6 +16454,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     reviews?: ReviewsUpdateManyWithoutMovieNestedInput
     bookmarks?: BookmarkedMoviesUpdateManyWithoutMovieNestedInput
     watchedMovies?: WatchedMoviesUpdateManyWithoutMovieNestedInput
@@ -17920,6 +16472,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     reviews?: ReviewsUncheckedUpdateManyWithoutMovieNestedInput
     bookmarks?: BookmarkedMoviesUncheckedUpdateManyWithoutMovieNestedInput
     watchedMovies?: WatchedMoviesUncheckedUpdateManyWithoutMovieNestedInput
@@ -17960,6 +16513,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
     categories?: MoviesCategoriesCreateNestedManyWithoutMovieInput
     reviews?: ReviewsCreateNestedManyWithoutMovieInput
     bookmarks?: BookmarkedMoviesCreateNestedManyWithoutMovieInput
@@ -17977,6 +16531,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
     categories?: MoviesCategoriesUncheckedCreateNestedManyWithoutMovieInput
     reviews?: ReviewsUncheckedCreateNestedManyWithoutMovieInput
     bookmarks?: BookmarkedMoviesUncheckedCreateNestedManyWithoutMovieInput
@@ -18009,6 +16564,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: MoviesCategoriesUpdateManyWithoutMovieNestedInput
     reviews?: ReviewsUpdateManyWithoutMovieNestedInput
     bookmarks?: BookmarkedMoviesUpdateManyWithoutMovieNestedInput
@@ -18026,6 +16582,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: MoviesCategoriesUncheckedUpdateManyWithoutMovieNestedInput
     reviews?: ReviewsUncheckedUpdateManyWithoutMovieNestedInput
     bookmarks?: BookmarkedMoviesUncheckedUpdateManyWithoutMovieNestedInput
@@ -18075,11 +16632,13 @@ export namespace Prisma {
   }
 
   export type UsersCreateWithoutReviewsInput = {
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
-    tokens?: LoginTokensCreateNestedManyWithoutUserInput
+    provider?: string | null
+    providerId?: string | null
     bookmarks?: BookmarkedMoviesCreateNestedManyWithoutUserInput
     watchedMovies?: WatchedMoviesCreateNestedManyWithoutUserInput
     followers?: FollowersCreateNestedManyWithoutFollowerInput
@@ -18088,11 +16647,13 @@ export namespace Prisma {
 
   export type UsersUncheckedCreateWithoutReviewsInput = {
     id?: number
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
-    tokens?: LoginTokensUncheckedCreateNestedManyWithoutUserInput
+    provider?: string | null
+    providerId?: string | null
     bookmarks?: BookmarkedMoviesUncheckedCreateNestedManyWithoutUserInput
     watchedMovies?: WatchedMoviesUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowersUncheckedCreateNestedManyWithoutFollowerInput
@@ -18114,6 +16675,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
     categories?: MoviesCategoriesCreateNestedManyWithoutMovieInput
     bookmarks?: BookmarkedMoviesCreateNestedManyWithoutMovieInput
     watchedMovies?: WatchedMoviesCreateNestedManyWithoutMovieInput
@@ -18131,6 +16693,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
     categories?: MoviesCategoriesUncheckedCreateNestedManyWithoutMovieInput
     bookmarks?: BookmarkedMoviesUncheckedCreateNestedManyWithoutMovieInput
     watchedMovies?: WatchedMoviesUncheckedCreateNestedManyWithoutMovieInput
@@ -18154,11 +16717,13 @@ export namespace Prisma {
   }
 
   export type UsersUpdateWithoutReviewsInput = {
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tokens?: LoginTokensUpdateManyWithoutUserNestedInput
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
     bookmarks?: BookmarkedMoviesUpdateManyWithoutUserNestedInput
     watchedMovies?: WatchedMoviesUpdateManyWithoutUserNestedInput
     followers?: FollowersUpdateManyWithoutFollowerNestedInput
@@ -18167,11 +16732,13 @@ export namespace Prisma {
 
   export type UsersUncheckedUpdateWithoutReviewsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tokens?: LoginTokensUncheckedUpdateManyWithoutUserNestedInput
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
     bookmarks?: BookmarkedMoviesUncheckedUpdateManyWithoutUserNestedInput
     watchedMovies?: WatchedMoviesUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowersUncheckedUpdateManyWithoutFollowerNestedInput
@@ -18199,6 +16766,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: MoviesCategoriesUpdateManyWithoutMovieNestedInput
     bookmarks?: BookmarkedMoviesUpdateManyWithoutMovieNestedInput
     watchedMovies?: WatchedMoviesUpdateManyWithoutMovieNestedInput
@@ -18216,6 +16784,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: MoviesCategoriesUncheckedUpdateManyWithoutMovieNestedInput
     bookmarks?: BookmarkedMoviesUncheckedUpdateManyWithoutMovieNestedInput
     watchedMovies?: WatchedMoviesUncheckedUpdateManyWithoutMovieNestedInput
@@ -18223,11 +16792,13 @@ export namespace Prisma {
   }
 
   export type UsersCreateWithoutBookmarksInput = {
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
-    tokens?: LoginTokensCreateNestedManyWithoutUserInput
+    provider?: string | null
+    providerId?: string | null
     reviews?: ReviewsCreateNestedManyWithoutUserInput
     watchedMovies?: WatchedMoviesCreateNestedManyWithoutUserInput
     followers?: FollowersCreateNestedManyWithoutFollowerInput
@@ -18236,11 +16807,13 @@ export namespace Prisma {
 
   export type UsersUncheckedCreateWithoutBookmarksInput = {
     id?: number
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
-    tokens?: LoginTokensUncheckedCreateNestedManyWithoutUserInput
+    provider?: string | null
+    providerId?: string | null
     reviews?: ReviewsUncheckedCreateNestedManyWithoutUserInput
     watchedMovies?: WatchedMoviesUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowersUncheckedCreateNestedManyWithoutFollowerInput
@@ -18262,6 +16835,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
     categories?: MoviesCategoriesCreateNestedManyWithoutMovieInput
     reviews?: ReviewsCreateNestedManyWithoutMovieInput
     watchedMovies?: WatchedMoviesCreateNestedManyWithoutMovieInput
@@ -18279,6 +16853,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
     categories?: MoviesCategoriesUncheckedCreateNestedManyWithoutMovieInput
     reviews?: ReviewsUncheckedCreateNestedManyWithoutMovieInput
     watchedMovies?: WatchedMoviesUncheckedCreateNestedManyWithoutMovieInput
@@ -18302,11 +16877,13 @@ export namespace Prisma {
   }
 
   export type UsersUpdateWithoutBookmarksInput = {
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tokens?: LoginTokensUpdateManyWithoutUserNestedInput
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: ReviewsUpdateManyWithoutUserNestedInput
     watchedMovies?: WatchedMoviesUpdateManyWithoutUserNestedInput
     followers?: FollowersUpdateManyWithoutFollowerNestedInput
@@ -18315,11 +16892,13 @@ export namespace Prisma {
 
   export type UsersUncheckedUpdateWithoutBookmarksInput = {
     id?: IntFieldUpdateOperationsInput | number
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tokens?: LoginTokensUncheckedUpdateManyWithoutUserNestedInput
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: ReviewsUncheckedUpdateManyWithoutUserNestedInput
     watchedMovies?: WatchedMoviesUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowersUncheckedUpdateManyWithoutFollowerNestedInput
@@ -18347,6 +16926,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: MoviesCategoriesUpdateManyWithoutMovieNestedInput
     reviews?: ReviewsUpdateManyWithoutMovieNestedInput
     watchedMovies?: WatchedMoviesUpdateManyWithoutMovieNestedInput
@@ -18364,6 +16944,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: MoviesCategoriesUncheckedUpdateManyWithoutMovieNestedInput
     reviews?: ReviewsUncheckedUpdateManyWithoutMovieNestedInput
     watchedMovies?: WatchedMoviesUncheckedUpdateManyWithoutMovieNestedInput
@@ -18371,11 +16952,13 @@ export namespace Prisma {
   }
 
   export type UsersCreateWithoutWatchedMoviesInput = {
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
-    tokens?: LoginTokensCreateNestedManyWithoutUserInput
+    provider?: string | null
+    providerId?: string | null
     reviews?: ReviewsCreateNestedManyWithoutUserInput
     bookmarks?: BookmarkedMoviesCreateNestedManyWithoutUserInput
     followers?: FollowersCreateNestedManyWithoutFollowerInput
@@ -18384,11 +16967,13 @@ export namespace Prisma {
 
   export type UsersUncheckedCreateWithoutWatchedMoviesInput = {
     id?: number
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
-    tokens?: LoginTokensUncheckedCreateNestedManyWithoutUserInput
+    provider?: string | null
+    providerId?: string | null
     reviews?: ReviewsUncheckedCreateNestedManyWithoutUserInput
     bookmarks?: BookmarkedMoviesUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowersUncheckedCreateNestedManyWithoutFollowerInput
@@ -18410,6 +16995,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
     categories?: MoviesCategoriesCreateNestedManyWithoutMovieInput
     reviews?: ReviewsCreateNestedManyWithoutMovieInput
     bookmarks?: BookmarkedMoviesCreateNestedManyWithoutMovieInput
@@ -18427,6 +17013,7 @@ export namespace Prisma {
     rating: number
     releaseDate: Date | string
     created_at?: Date | string
+    updated_at?: Date | string
     categories?: MoviesCategoriesUncheckedCreateNestedManyWithoutMovieInput
     reviews?: ReviewsUncheckedCreateNestedManyWithoutMovieInput
     bookmarks?: BookmarkedMoviesUncheckedCreateNestedManyWithoutMovieInput
@@ -18450,11 +17037,13 @@ export namespace Prisma {
   }
 
   export type UsersUpdateWithoutWatchedMoviesInput = {
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tokens?: LoginTokensUpdateManyWithoutUserNestedInput
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: ReviewsUpdateManyWithoutUserNestedInput
     bookmarks?: BookmarkedMoviesUpdateManyWithoutUserNestedInput
     followers?: FollowersUpdateManyWithoutFollowerNestedInput
@@ -18463,11 +17052,13 @@ export namespace Prisma {
 
   export type UsersUncheckedUpdateWithoutWatchedMoviesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tokens?: LoginTokensUncheckedUpdateManyWithoutUserNestedInput
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: ReviewsUncheckedUpdateManyWithoutUserNestedInput
     bookmarks?: BookmarkedMoviesUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowersUncheckedUpdateManyWithoutFollowerNestedInput
@@ -18495,6 +17086,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: MoviesCategoriesUpdateManyWithoutMovieNestedInput
     reviews?: ReviewsUpdateManyWithoutMovieNestedInput
     bookmarks?: BookmarkedMoviesUpdateManyWithoutMovieNestedInput
@@ -18512,6 +17104,7 @@ export namespace Prisma {
     rating?: FloatFieldUpdateOperationsInput | number
     releaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: MoviesCategoriesUncheckedUpdateManyWithoutMovieNestedInput
     reviews?: ReviewsUncheckedUpdateManyWithoutMovieNestedInput
     bookmarks?: BookmarkedMoviesUncheckedUpdateManyWithoutMovieNestedInput
@@ -18519,11 +17112,13 @@ export namespace Prisma {
   }
 
   export type UsersCreateWithoutFollowingInput = {
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
-    tokens?: LoginTokensCreateNestedManyWithoutUserInput
+    provider?: string | null
+    providerId?: string | null
     reviews?: ReviewsCreateNestedManyWithoutUserInput
     bookmarks?: BookmarkedMoviesCreateNestedManyWithoutUserInput
     watchedMovies?: WatchedMoviesCreateNestedManyWithoutUserInput
@@ -18532,11 +17127,13 @@ export namespace Prisma {
 
   export type UsersUncheckedCreateWithoutFollowingInput = {
     id?: number
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
-    tokens?: LoginTokensUncheckedCreateNestedManyWithoutUserInput
+    provider?: string | null
+    providerId?: string | null
     reviews?: ReviewsUncheckedCreateNestedManyWithoutUserInput
     bookmarks?: BookmarkedMoviesUncheckedCreateNestedManyWithoutUserInput
     watchedMovies?: WatchedMoviesUncheckedCreateNestedManyWithoutUserInput
@@ -18549,11 +17146,13 @@ export namespace Prisma {
   }
 
   export type UsersCreateWithoutFollowersInput = {
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
-    tokens?: LoginTokensCreateNestedManyWithoutUserInput
+    provider?: string | null
+    providerId?: string | null
     reviews?: ReviewsCreateNestedManyWithoutUserInput
     bookmarks?: BookmarkedMoviesCreateNestedManyWithoutUserInput
     watchedMovies?: WatchedMoviesCreateNestedManyWithoutUserInput
@@ -18562,11 +17161,13 @@ export namespace Prisma {
 
   export type UsersUncheckedCreateWithoutFollowersInput = {
     id?: number
-    username: string
     email: string
-    password_hash: string
+    username: string
+    password: string
+    role: string
     created_at?: Date | string
-    tokens?: LoginTokensUncheckedCreateNestedManyWithoutUserInput
+    provider?: string | null
+    providerId?: string | null
     reviews?: ReviewsUncheckedCreateNestedManyWithoutUserInput
     bookmarks?: BookmarkedMoviesUncheckedCreateNestedManyWithoutUserInput
     watchedMovies?: WatchedMoviesUncheckedCreateNestedManyWithoutUserInput
@@ -18590,11 +17191,13 @@ export namespace Prisma {
   }
 
   export type UsersUpdateWithoutFollowingInput = {
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tokens?: LoginTokensUpdateManyWithoutUserNestedInput
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: ReviewsUpdateManyWithoutUserNestedInput
     bookmarks?: BookmarkedMoviesUpdateManyWithoutUserNestedInput
     watchedMovies?: WatchedMoviesUpdateManyWithoutUserNestedInput
@@ -18603,11 +17206,13 @@ export namespace Prisma {
 
   export type UsersUncheckedUpdateWithoutFollowingInput = {
     id?: IntFieldUpdateOperationsInput | number
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tokens?: LoginTokensUncheckedUpdateManyWithoutUserNestedInput
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: ReviewsUncheckedUpdateManyWithoutUserNestedInput
     bookmarks?: BookmarkedMoviesUncheckedUpdateManyWithoutUserNestedInput
     watchedMovies?: WatchedMoviesUncheckedUpdateManyWithoutUserNestedInput
@@ -18626,11 +17231,13 @@ export namespace Prisma {
   }
 
   export type UsersUpdateWithoutFollowersInput = {
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tokens?: LoginTokensUpdateManyWithoutUserNestedInput
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: ReviewsUpdateManyWithoutUserNestedInput
     bookmarks?: BookmarkedMoviesUpdateManyWithoutUserNestedInput
     watchedMovies?: WatchedMoviesUpdateManyWithoutUserNestedInput
@@ -18639,22 +17246,17 @@ export namespace Prisma {
 
   export type UsersUncheckedUpdateWithoutFollowersInput = {
     id?: IntFieldUpdateOperationsInput | number
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password_hash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    tokens?: LoginTokensUncheckedUpdateManyWithoutUserNestedInput
+    provider?: NullableStringFieldUpdateOperationsInput | string | null
+    providerId?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: ReviewsUncheckedUpdateManyWithoutUserNestedInput
     bookmarks?: BookmarkedMoviesUncheckedUpdateManyWithoutUserNestedInput
     watchedMovies?: WatchedMoviesUncheckedUpdateManyWithoutUserNestedInput
     following?: FollowersUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type LoginTokensCreateManyUserInput = {
-    id?: number
-    token: string
-    createdAt?: Date | string
-    expiresAt: Date | string
   }
 
   export type ReviewsCreateManyUserInput = {
@@ -18681,26 +17283,6 @@ export namespace Prisma {
 
   export type FollowersCreateManyUserInput = {
     followerId: number
-  }
-
-  export type LoginTokensUpdateWithoutUserInput = {
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LoginTokensUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LoginTokensUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReviewsUpdateWithoutUserInput = {

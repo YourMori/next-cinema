@@ -33,7 +33,7 @@ const movie = {
   age: "16+",
   description:
     "A breathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful soundtrackA breathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful soundtrack.A breathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful soundtrack.A breathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful soundtrack.A breathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful soundtrack.A breathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful soundtrack..",
-  posterUrl: "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4",
+  posterUrl: "/111.jpg",
   trailerUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // YouTube iframe
   ratings: {
     site: 8.2,

@@ -25,5 +25,18 @@ a {
 
 html,
 body {
-  @apply scrollbar-hide;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+#nprogress .bar {
+  @apply bg-red !important;
+}
+
+#nprogress .peg {
+  @apply bg-red shadow-primary !important;
+}
+
+#nprogress .spinner-icon {
+  @apply border-t-border border-b-border !important;
 }

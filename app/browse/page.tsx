@@ -10,7 +10,7 @@ const films = new Array(10).fill(null).map((_, idx) => ({
   id: idx,
   title: `Movie ${idx + 1}`,
   rating: 7.9,
-  image: `https://images.unsplash.com/photo-1524985069026-dd778a71c7b4`,
+  image: "/111.jpg",
 }));
 
 export default function BrowsePage() {
@@ -18,13 +18,7 @@ export default function BrowsePage() {
     <div className="w-full">
       {/* Featured Movie */}
       <Card className="relative w-full h-[400px] mb-[32px] bg-primary rounded-xl">
-        <Image
-          src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4"
-          alt="Featured Movie"
-          layout="fill"
-          objectFit="cover"
-          className="opacity-60"
-        />
+        <Image src="/111.jpg" alt="Featured Movie" layout="fill" objectFit="cover" className="opacity-60" />
         <div className="text-textPrimary mt-6 ml-8">
           <h2 className="text-xl font-bold">Epic Movie Title</h2>
           <p className="mt-2 text-lg">A thrilling adventure awaits.</p>

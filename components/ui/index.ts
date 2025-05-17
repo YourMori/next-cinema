@@ -6,6 +6,25 @@ export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrev
 export { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, ChartStyle } from "./chart";
 export { Checkbox } from "./checkbox";
 export { Container } from "./container";
+export { Dialog } from "./dialog";
+export {
+  DropdownMenu,
+  DropdownMenuPortal,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+} from "./dropdown-menu";
+export { FormInput } from "./formInput";
 export { Input } from "./input";
 export { Label } from "./label";
 export {

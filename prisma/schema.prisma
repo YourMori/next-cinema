@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../lib/generated/prisma"
 }
 
 datasource db {
@@ -16,27 +15,22 @@ datasource db {
 
 model Users {
   id            Int             @id @default(autoincrement())
-  username      String          @unique
   email         String          @unique
-  password_hash String
+  username      String          @unique
+  password      String
+  role          String
   created_at    DateTime        @default(now())
+
+  provider      String?
+  providerId    String?
   
-  tokens        LoginTokens[] 
   reviews       Reviews[] 
   bookmarks     BookmarkedMovies[]
   watchedMovies WatchedMovies[] 
   followers     Followers[]     @relation("Following") 
   following     Followers[]     @relation("Followers")
-}
 
-model LoginTokens {
-  id         Int      @id @default(autoincrement())
-  userId     Int
-  token      String
-  createdAt  DateTime @default(now())
-  expiresAt  DateTime
-  
-  user       Users    @relation(fields: [userId], references: [id])
+  @@map("User")
 }
 
 model Movies {
@@ -50,6 +44,7 @@ model Movies {
   rating        Float
   releaseDate   DateTime
   created_at    DateTime        @default(now())
+  updated_at    DateTime        @updatedAt
 
   categories    MoviesCategories[] 
   reviews       Reviews[] 
