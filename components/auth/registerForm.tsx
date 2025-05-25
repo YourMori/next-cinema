@@ -1,103 +1,59 @@
 "use client";
 
-import React, { useState } from "react";
-import { signIn } from "next-auth/react";
+import React from "react";
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
+import { FormInput } from "../ui";
+import { formRegisterSchema, TFormRegisterValues } from "./schemas";
+import { registerUser } from "@/app/api/actions/registerUser";
 
 interface RegisterFormProps {
-  onSuccess: () => void;
+  onClose: () => void;
   onSwitch: () => void;
 }
 
-export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess, onSwitch }) => {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+export const RegisterForm: React.FC<RegisterFormProps> = ({ onClose, onSwitch }) => {
+  const form = useForm<TFormRegisterValues>({
+    resolver: zodResolver(formRegisterSchema),
+    defaultValues: {
+      email: "",
+      username: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
 
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
-
-    if (!username) {
-      setError("Введите имя пользователя");
-      setLoading(false);
-      return;
-    }
-
+  const onSubmit = async (data: TFormRegisterValues) => {
     try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, username, password }),
+      await registerUser({
+        username: data.username,
+        email: data.email,
+        password: data.password,
       });
 
-      const contentType = res.headers.get("content-type");
-      const data = contentType?.includes("application/json") ? await res.json() : { message: await res.text() };
+      toast.success("Вы успешно зарегистрировались! Подтвердите вашу почту.");
 
-      if (!res.ok) {
-        throw new Error(data.message || "Ошибка регистрации");
-      }
-
-      const signInRes = await signIn("credentials", {
-        redirect: false,
-        email,
-        password,
-      });
-
-      if (signInRes?.error) {
-        throw new Error(signInRes.error);
-      }
-
-      onSuccess();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      console.error("Registration error:", err);
-      setError(err.message || "Ошибка сервера");
-    } finally {
-      setLoading(false);
+      onClose?.();
+    } catch (e) {
+      toast.error("Неверный email или пароль");
+      console.log("Error register form", e);
     }
   };
 
   return (
-    <form onSubmit={handleRegister} className="flex flex-col gap-4">
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        className="px-4 py-2 bg-primary border-border text-textPrimary placeholder-text-secondaryLight h-9"
-        autoComplete="username"
-      />
-      <input
-        type="text"
-        placeholder="Имя пользователя"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-        className="px-4 py-2 bg-primary border-border text-textPrimary placeholder-text-secondaryLight h-9"
-        autoComplete="name"
-      />
-      <input
-        type="password"
-        placeholder="Пароль"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        className="px-4 py-2 bg-primary border-border text-textPrimary placeholder-text-secondaryLight h-9"
-        autoComplete="new-password"
-      />
+    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <FormInput placeholder="Email" type="email" required {...form.register("email")} />
+      <FormInput placeholder="Username" type="text" required {...form.register("username")} />
+      <FormInput placeholder="New password" type="password" {...form.register("password")} />
+      <FormInput placeholder="Confirm password" type="password" {...form.register("confirmPassword")} />
 
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-
-      <Button type="submit" disabled={loading} className="rounded-md">
-        {loading ? "Загрузка..." : "Зарегистрироваться"}
+      <Button type="submit" className="rounded-md">
+        Зарегистрироваться
       </Button>
 
-      <Button variant="ghost" type="button" onClick={onSwitch} className="rounded-md">
+      <Button variant="ghost" type="button" className="rounded-md" onClick={onSwitch}>
         Уже есть аккаунт?
       </Button>
     </form>

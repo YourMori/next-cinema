@@ -22,7 +22,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
         {isLogin ? (
           <LoginForm onSwitch={() => setIsLogin(false)} onClose={onClose} />
         ) : (
-          <RegisterForm onSuccess={onClose} onSwitch={() => setIsLogin(true)} />
+          <RegisterForm onSwitch={() => setIsLogin(true)} onClose={onClose} />
         )}
 
         <Button variant="default" onClick={onClose} className="mt-4 w-full rounded-md">

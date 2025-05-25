@@ -19,20 +19,33 @@ model Users {
   username      String          @unique
   password      String
   role          String
+  verified      DateTime?
   created_at    DateTime        @default(now())
 
   provider      String?
   providerId    String?
   
-  reviews       Reviews[] 
-  bookmarks     BookmarkedMovies[]
-  watchedMovies WatchedMovies[] 
-  followers     Followers[]     @relation("Following") 
-  following     Followers[]     @relation("Followers")
+  verificationCode  VerificationCode?
+  reviews           Reviews[] 
+  bookmarks         BookmarkedMovies[]
+  watchedMovies     WatchedMovies[] 
+  followers         Followers[]     @relation("Following") 
+  following         Followers[]     @relation("Followers")
 
   @@map("User")
 }
 
+model VerificationCode {
+    id Int @id @default(autoincrement())
+    code String
+
+    user   Users @relation(fields: [userId], references: [id])
+    userId Int   @unique
+
+    createdAt DateTime @default(now())
+
+    @@unique([userId, code])
+}
 model Movies {
   id            Int             @id @default(autoincrement())
   title         String
@@ -43,16 +56,89 @@ model Movies {
   duration      Int
   rating        Float
   releaseDate   DateTime
+  country       String?
+  slogan        String?
+  director      String?
+  script        String?
+  producer      String?
+  operator      String?
+  composer      String?
+  artist        String?
+  budget        String?
+  viewers       String?
+  boxOffice     String?
+  premiere      String?
+  ageRating     String?
+  durationText  String?
+  cast          String?  
+
   created_at    DateTime        @default(now())
   updated_at    DateTime        @updatedAt
 
-  categories    MoviesCategories[] 
-  reviews       Reviews[] 
-  bookmarks     BookmarkedMovies[]
-  watchedMovies WatchedMovies[] 
-  featuredMovie FeaturedMovie? 
+  categories        MoviesCategories[] 
+  reviews           Reviews[] 
+  bookmarks         BookmarkedMovies[]
+  watchedMovies     WatchedMovies[] 
+  featuredMovie     FeaturedMovie? 
+  homepageSections  HomepageSectionMovie[]
+  actors            MovieActor[] 
+}
+model Actor {
+  id          Int       @id @default(autoincrement())
+  name        String
+  career      String? 
+  height      Float? 
+  birthDate   DateTime? 
+  birthPlace  String?
+  zodiacSign  String?
+  genres      String?
+  totalMovies Int?
+  activeYears String?
+
+  movies      MovieActor[]
+}
+model MovieActor {
+  id       Int    @id @default(autoincrement())
+  movieId  Int
+  actorId  Int
+
+  role     String?
+
+  movie    Movies  @relation(fields: [movieId], references: [id])
+  actor    Actor   @relation(fields: [actorId], references: [id])
+
+  @@unique([movieId, actorId])
 }
 
+
+model FeaturedMovie {
+  id         Int       @id @default(autoincrement())
+  movieId    Int       @unique
+  updatedAt  DateTime  @default(now())
+
+  movie      Movies    @relation(fields: [movieId], references: [id])
+}
+
+model HomepageSectionMovie {
+  homepageSectionId Int
+  movieId           Int
+
+  homepageSection   HomepageSection @relation(fields: [homepageSectionId], references: [id])
+  movie             Movies          @relation(fields: [movieId], references: [id])
+
+  @@id([homepageSectionId, movieId])
+}
+
+model HomepageSection {
+  id          Int        @id @default(autoincrement())
+  categoryId  Int
+  title       String
+  sortOrder   Int
+  movieLimit  Int
+
+  category    Categories @relation(fields: [categoryId], references: [id])
+  movies      HomepageSectionMovie[]
+}
 model Categories {
   id                Int       @id @default(autoincrement())
   name              String
@@ -70,24 +156,6 @@ model MoviesCategories {
   category   Categories @relation(fields: [categoryId], references: [id])
   
   @@id([movieId, categoryId])
-}
-
-model FeaturedMovie {
-  id         Int       @id @default(autoincrement())
-  movieId    Int       @unique
-  updatedAt  DateTime  @default(now())
-
-  movie      Movies    @relation(fields: [movieId], references: [id])
-}
-
-model HomepageSection {
-  id          Int        @id @default(autoincrement())
-  categoryId  Int
-  title       String
-  sortOrder   Int
-  movieLimit  Int
-
-  category    Categories @relation(fields: [categoryId], references: [id])
 }
 
 model Reviews {

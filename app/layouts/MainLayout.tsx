@@ -1,24 +1,45 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Search, Bell, MessageSquare } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "sonner";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Input, Button, Container } from "@/components/ui";
 import { AuthModal, UserDropdown } from "@/components/auth";
-import { toast } from "sonner";
-import { useSession } from "next-auth/react";
+import { useSearchMovies } from "@/hooks";
 
 export const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const canGoBack = typeof window !== "undefined" && window.history.length > 1;
   const canGoForward = false;
 
-  const [authOpen, setAuthOpen] = React.useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
 
   const { status } = useSession();
   const prevStatus = useRef(status);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const { results, loading } = useSearchMovies(searchQuery);
+
+  useEffect(() => {
+    let toastMessage = "";
+
+    if (searchParams.has("verified")) {
+      toastMessage = "Почта успешно подтверждена!";
+    }
+
+    if (toastMessage) {
+      setTimeout(() => {
+        router.replace("/");
+        toast.success(toastMessage, { duration: 3000 });
+      }, 1000);
+    }
+  }, []);
 
   useEffect(() => {
     if (prevStatus.current === "authenticated" && status === "unauthenticated") {
@@ -55,7 +76,30 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
             <Input
               placeholder="Search everything"
               className="pl-12 bg-primary border-border text-textPrimary placeholder-text-secondaryLight w-[300px] h-[36px] rounded-xl"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
+
+            {searchQuery && (
+              <div className="absolute top-[110%] left-0 w-[300px] bg-secondary border border-border rounded-md shadow-lg z-50">
+                {loading ? (
+                  <div className="p-3 text-sm text-primary">Загрузка...</div>
+                ) : results.length > 0 ? (
+                  results.map((movie) => (
+                    <Link
+                      href={`/movie/${movie.id}`}
+                      key={movie.id}
+                      className="block px-4 py-2 hover:bg-mutedHover/50 text-sm text-textPrimary"
+                      onClick={() => setSearchQuery("")}
+                    >
+                      {movie.title} ({movie.release_year})
+                    </Link>
+                  ))
+                ) : (
+                  <div className="p-3 text-sm text-Primary">Ничего не найдено</div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 

@@ -11,7 +11,6 @@ import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 
 interface LoginFormProps {
-  // onSuccess: () => void;
   onSwitch: () => void;
   onClose: () => void;
 }

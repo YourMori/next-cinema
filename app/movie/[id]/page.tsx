@@ -3,139 +3,116 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { BookmarkIcon, PlusIcon, StarIcon, ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
+import { Avatar } from "@radix-ui/react-avatar";
+import dayjs from "dayjs";
 import { Button } from "@/components/ui/button";
 import { DetailCard } from "@/components/index";
 import { cn } from "@/lib/utils";
-import { Avatar } from "@radix-ui/react-avatar";
-import { AvatarFallback, AvatarImage } from "@/components/ui";
+import { AvatarFallback, AvatarImage, Skeleton } from "@/components/ui";
 import { fetchMovieByTitle } from "@/app/api";
-
+import { MoviesWithRelations } from "@/lib/getMovieById";
+import { addToBookmarks } from "@/lib/api/bookmark";
+import { toast } from "sonner";
 interface MoviePageProps {
   params: {
     id: string;
   };
 }
 
-type Rating = {
-  Source: string;
-  Value: string;
-};
+interface MovieOMDbData {
+  title: string;
+  Poster?: string;
+  Ratings?: { Source: string; Value: string }[];
+}
 
-type MovieData = {
-  Ratings?: Rating[] | null | undefined;
-};
-
-// Тестовые данные
-const movie = {
-  title: "Inception",
-  originalTitle: "Epic Movie Original",
-  year: 2024,
-  age: "16+",
-  description:
-    "A breathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful soundtrackA breathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful soundtrack.A breathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful soundtrack.A breathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful soundtrack.A breathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful soundtrack.A breathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful soundtrack..",
-  posterUrl: "/111.jpg",
-  trailerUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // YouTube iframe
-  ratings: {
-    site: 8.2,
-    imdb: 7.5,
-    rottenTomatoes: "84%",
-  },
-};
-
-const cast = [
-  "Сергей Безруков",
-  "Алексей Серебряков",
-  "Чулпан Хаматова",
-  "Данила Козловский",
-  "Ксения Раппопорт",
-  "Фёдор Бондарчук",
-  "Елизавета Боярская",
-  "Юрий Колокольников",
-  "Иван Ургант",
-  "Павел Прилучный",
-  "Мария Машкова",
-  "Пётр Фёдоров",
-  "Алексей Серебряков",
-  "Чулпан Хаматова",
-  "Данила Козловский",
-  "Ксения Раппопорт",
-  "Фёдор Бондарчук",
-  "Елизавета Боярская",
-  "Юрий Колокольников",
-  "Иван Ургант",
-  "Павел Прилучный",
-  "Мария Машкова",
-  "Пётр Фёдоров",
-  "Алексей Серебряков",
-  "Чулпан Хаматова",
-  "Данила Козловский",
-  "Ксения Раппопорт",
-  "Фёдор Бондарчук",
-  "Елизавета Боярская",
-  "Юрий Колокольников",
-  "Иван Ургант",
-  "Павел Прилучный",
-  "Мария Машкова",
-  "Пётр Фёдоров",
-];
-
-const reviews = [
-  {
-    id: 1,
-    user: "Alice Johnson",
-    avatarUrl: "https://github.com/shadcn.png",
-    totalReviews: 12,
-    date: "2025-04-15",
-    time: "14:32",
-    title: "A Visual Masterpiece",
-    comment:
-      "This film was a eathtaking story of loveathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals ae, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals aeathtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals a Every frame was like a painting, and the music made it all even more powerful. I especially loved the emotional depth of the main characters and the world-building.",
-    likes: 34,
-    dislikes: 2,
-  },
-  {
-    id: 2,
-    user: "Bob Smith",
-    avatarUrl: "https://github.com/shadcn.png",
-    totalReviews: 5,
-    date: "2025-04-10",
-    time: "09:12",
-    title: "Good but Too Long",
-    comment:
-      "The story had potential andthtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful southtaking story of love, courage, and sacrifice set in a fantastical world. With groundbreaking visuals and a powerful sou the actors did great, but some scenes were unnecessarily stretched. Still a solid 7 for the effort.",
-    likes: 12,
-    dislikes: 5,
-  },
-];
-export default function MovieDetailPage({}: MoviePageProps) {
-  const [openReviews, setOpenReviews] = React.useState<Record<number, boolean>>({});
+export default function MovieDetailPage({ params }: MoviePageProps) {
+  const [movie, setMovie] = useState<MoviesWithRelations | null>(null);
+  const [MovieOMDbData, setMovieOMDbData] = useState<MovieOMDbData | null>(null);
+  const [loading, setLoading] = useState(true);
   const [showAllActors, setShowAllActors] = useState(false);
-  const visibleActors = showAllActors ? cast : cast.slice(0, 8);
+  const [openReviews, setOpenReviews] = useState<Record<number, boolean>>({});
+  const [bookmarked, setBookmarked] = useState<boolean>(false);
 
-  const [movieRating, setMovieRating] = useState<MovieData | null>(null);
-  const [ratingLoading, setRatingLoading] = useState<boolean>(false);
+  const handleBookmark = async () => {
+    try {
+      const data = await addToBookmarks(Number(params.id));
+      if (data.added) {
+        setBookmarked(true);
+        toast.success("Фильм добавлен в закладки");
+      } else if (data.removed) {
+        setBookmarked(false);
+        toast.success("Фильм удалён из закладок");
+      }
+    } catch (e) {
+      console.error(e);
+      toast.error("Ошибка при добавлении в закладки");
+    } finally {
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setRatingLoading(true);
+    async function checkBookmark() {
+      try {
+        const res = await fetch(`/api/bookmark/${params.id}`);
+        const data = await res.json();
+        setBookmarked(data.bookmarked);
+      } catch (error) {
+        console.error("Ошибка при проверке закладки", error);
+      }
+    }
+
+    checkBookmark();
+  }, [params.id]);
+
+  useEffect(() => {
+    async function fetchMovie() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/movies/${params.id}`);
+        if (!res.ok) throw new Error("Failed to fetch movie");
+        const data: MoviesWithRelations = await res.json();
+        setMovie(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchMovie();
+  }, [params.id]);
+
+  useEffect(() => {
+    if (!movie) return;
+    async function fetchData() {
+      if (!movie) return;
       try {
         const response = await fetchMovieByTitle(movie.title);
-        setMovieRating(response);
+        setMovieOMDbData(response);
+        console.log("Рейтинг фильма:", response);
+        console.log("Постер:", MovieOMDbData?.Poster);
       } catch (error) {
         console.error("Ошибка при получении рейтинга:", error);
-      } finally {
-        setRatingLoading(false);
       }
-    };
-
+    }
     fetchData();
-  }, []);
-  console.log(ratingLoading, movieRating);
+  }, [movie]);
+
+  if (loading)
+    return (
+      <div className="grid grid-cols-12 gap-6 text-textPrimary h-screen">
+        <Skeleton className="col-span-3 h-[80%]" />
+        <Skeleton className="col-span-6 h-[80%]" />
+        <Skeleton className="col-span-3 h-[80%]" />
+      </div>
+    );
+  if (!movie) return <div>Фильм не найден</div>;
+
+  const visibleActors = showAllActors ? (movie.actors ?? []) : (movie.actors ?? []).slice(0, 8);
 
   function toggleReview(id: number) {
     setOpenReviews((prev) => ({
       ...prev,
-      [id]: !prev[id], // переключаем только выбранную
+      [id]: !prev[id],
     }));
   }
 
@@ -144,11 +121,11 @@ export default function MovieDetailPage({}: MoviePageProps) {
       {/* Left Column - Poster & Trailer */}
       <div className="col-span-3 flex flex-col gap-4">
         <div className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-lg">
-          <Image src={movie.posterUrl} alt="Movie Poster" fill className="object-cover" />
+          {MovieOMDbData?.Poster && <Image src={MovieOMDbData.Poster} alt={`${movie.title} Poster`} fill className="object-cover" />}
         </div>
         <div className="w-full aspect-video rounded-xl overflow-hidden shadow-md">
           <iframe
-            src={movie.trailerUrl}
+            src={""}
             title="Trailer"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -161,16 +138,16 @@ export default function MovieDetailPage({}: MoviePageProps) {
       <DetailCard className="col-span-6 flex flex-col gap-4">
         <div className="flex justify-between items-start">
           <h1 className="text-[32px] text-textPrimary font-medium">
-            {movie.title} <span className="text-[32px] text-textPrimary">({movie.year})</span>
+            {movie.title} <span className="text-[32px] text-textPrimary">({movie.release_year})</span>
           </h1>
-          <Button variant="secondary" size="icon">
+          <Button variant={bookmarked ? "default" : "secondary"} size="icon" onClick={handleBookmark}>
             <BookmarkIcon className="w-5 h-5" />
           </Button>
         </div>
 
         <div className="text-base text-textSecondary">
           <p>
-            {movie.originalTitle}({movie.age})
+            {movie.title} ({movie.ageRating})
           </p>
         </div>
 
@@ -182,52 +159,52 @@ export default function MovieDetailPage({}: MoviePageProps) {
         <h2 className="text-xl font-semibold mb-1">О фильме</h2>
         <div className="grid grid-cols-[200px_1fr] gap-y-2 text-base">
           <div>Год производства:</div>
-          <div>2025</div>
+          <div>{movie.release_year}</div>
 
           <div>Страна:</div>
-          <div>Россия</div>
+          <div>{movie.country}</div>
 
           <div>Жанр:</div>
-          <div>Военный, драма, история</div>
+          <div>Драма</div>
 
           <div>Слоган:</div>
-          <div>—</div>
+          <div>{movie.slogan}</div>
 
           <div>Режиссёр:</div>
-          <div>Сергей Коротаев</div>
+          <div>{movie.director}</div>
 
           <div>Сценарий:</div>
-          <div>Олег Антонов, Борис Васильев</div>
+          <div>{movie.script}</div>
 
           <div>Продюсер:</div>
-          <div>Владимир Машков, Александр Жаров, Тимур Вайнштейн, ...</div>
+          <div>{movie.producer}</div>
 
           <div>Оператор:</div>
-          <div>Игорь Гринякин</div>
+          <div>{movie.operator}</div>
 
           <div>Композитор:</div>
-          <div>Николай Ростов</div>
+          <div>{movie.composer}</div>
 
           <div>Художник:</div>
-          <div>Эдуард Галкин, Алексей Камышов, Елена Станкеева, ...</div>
+          <div>{movie.artist}</div>
 
           <div>Бюджет:</div>
-          <div>₽ 1 000 000 000</div>
+          <div>₽ {movie.budget}</div>
 
           <div>Зрители:</div>
-          <div>Россия — 1.1 млн, ...</div>
+          <div>{movie.viewers}</div>
 
           <div>Сборы в России:</div>
-          <div>$6 064 434</div>
+          <div>${movie.boxOffice}</div>
 
           <div>Премьера в России:</div>
-          <div>1 мая 2025, «Централ Партнершип»</div>
+          <div>{movie.premiere}</div>
 
           <div>Возраст:</div>
-          <div>12+</div>
+          <div>{movie.ageRating}</div>
 
           <div>Время:</div>
-          <div>2 ч</div>
+          <div>{movie.duration} ч</div>
         </div>
       </DetailCard>
 
@@ -236,18 +213,18 @@ export default function MovieDetailPage({}: MoviePageProps) {
         <div className="space-y-4 p-4">
           <h3 className="text-lg font-semibold mb-2">Ratings</h3>
           <div className="grid grid-cols-[150px_1fr] gap-y-2 text-base items-center">
-            <div className="font-medium text-xl">{movie.ratings.site}</div>
-            <div>23 223 оценок</div>
+            <div className="font-medium text-xl">{"111"}</div>
+            <div>{movie.rating} оценок</div>
 
             <div className="font-bold">IMDb:</div>
-            <div>{ratingLoading ? "" : movieRating?.Ratings?.[0].Value}</div>
+            <div className="font-bold">{MovieOMDbData?.Ratings?.[0].Value}</div>
 
             <div className="font-bold">Rotten Tomatoes:</div>
 
-            <div className="font-bold"> {movieRating?.Ratings?.[1].Value}</div>
+            <div className="font-bold"> {MovieOMDbData?.Ratings?.[1].Value}</div>
 
             <span className="font-bold">Metacritic:</span>
-            <div className="font-bold">{movieRating?.Ratings?.[2].Value}</div>
+            <div className="font-bold">{MovieOMDbData?.Ratings?.[2].Value}</div>
           </div>
 
           <div className="bg-muted rounded-lg shadow-sm">
@@ -259,11 +236,11 @@ export default function MovieDetailPage({}: MoviePageProps) {
 
           <h3 className="text-lg font-semibold mb-2">В главных ролях</h3>
           <ul className="space-y-1 text-sm text-textTertiary">
-            {visibleActors.map((actor, idx) => (
-              <li key={idx}>{actor}</li>
+            {visibleActors.map((actors, idx) => (
+              <li key={idx}>{actors.actor.name}</li>
             ))}
           </ul>
-          {cast.length > 8 && (
+          {movie.actors && movie.actors.length > 8 && (
             <Button variant={"default"} className=" mt-2 text-sm hover:underline" onClick={() => setShowAllActors(!showAllActors)}>
               {showAllActors ? "Скрыть" : "Показать больше"}
             </Button>
@@ -278,54 +255,53 @@ export default function MovieDetailPage({}: MoviePageProps) {
           Написать рецензию
         </Button>
         <div className="flex flex-col gap-6">
-          {reviews.map((review) => (
-            <div key={review.id} className="p-4 rounded-xl border border-border bg-muted shadow-sm">
-              {/* Верхняя часть — Аватар, имя, статистика, дата */}
-              <div className="flex justify-between items-start">
-                <div className="flex items-center gap-4">
-                  <div className="w-8 h-8 rounded-full overflow-hidden">
-                    <Avatar className="w-8 h-8 mr-[16px]">
-                      <AvatarImage src={review.avatarUrl} alt="avatar" />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
+          {movie.reviews &&
+            movie.reviews.map((review) => (
+              <div key={review.id} className="p-4 rounded-xl border border-border bg-muted shadow-sm">
+                {/* Верхняя часть — Аватар, имя, статистика, дата */}
+                <div className="flex justify-between items-start">
+                  <div className="flex items-center gap-4">
+                    <div className="w-8 h-8 rounded-full overflow-hidden">
+                      <Avatar className="w-8 h-8 mr-[16px]">
+                        <AvatarImage src={""} alt="avatar" />
+                        <AvatarFallback>CN</AvatarFallback>
+                      </Avatar>
+                    </div>
+                    <div>
+                      <div className="text-base font-semibold text-textPrimary">{review.user.username}</div>
+                      <div className="text-sm text-textSecondary">{11} reviews</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-base font-semibold text-textPrimary">{review.user}</div>
-                    <div className="text-sm text-textSecondary">{review.totalReviews} reviews</div>
-                  </div>
+                  <div className="text-sm text-textSecondary mt-1 whitespace-nowrap">{dayjs(review.createdAt).format("DD.MM.YYYY")}</div>
                 </div>
-                <div className="text-sm text-textSecondary mt-1 whitespace-nowrap">
-                  {review.date} • {review.time}
+
+                {/* Линия */}
+                <hr className="my-4 border-border" />
+
+                {/* Контент отзыва */}
+                <div className="space-y-2">
+                  <h3 className="text-lg font-semibold text-textPrimary">{review.comment}</h3>
+                  <p className={cn("text-sm text-textTertiary", !openReviews[review.id] && "line-clamp-4")}>{review.comment}</p>
+                  {review.comment && review.comment.length > 300 && (
+                    <Button variant="ghost" size="sm" onClick={() => toggleReview(review.id)} className="mt-1">
+                      {openReviews[review.id] ? "Показать меньше" : "Читать полностью"}
+                    </Button>
+                  )}
                 </div>
-              </div>
 
-              {/* Линия */}
-              <hr className="my-4 border-border" />
-
-              {/* Контент отзыва */}
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold text-textPrimary">{review.title}</h3>
-                <p className={cn("text-sm text-textTertiary", !openReviews[review.id] && "line-clamp-4")}>{review.comment}</p>
-                {review.comment.length > 300 && ( // or any length threshold you want
-                  <Button variant="ghost" size="sm" onClick={() => toggleReview(review.id)} className="mt-1">
-                    {openReviews[review.id] ? "Показать меньше" : "Читать полностью"}
+                {/* Лайки / дизлайки */}
+                <div className="flex gap-4 mt-4">
+                  <Button variant="ghost" className="flex items-center gap-2 text-sm">
+                    <ThumbsUpIcon className="w-4 h-4" />
+                    {17}
                   </Button>
-                )}
+                  <Button variant="ghost" className="flex items-center gap-2 text-sm">
+                    <ThumbsDownIcon className="w-4 h-4" />
+                    {6}
+                  </Button>
+                </div>
               </div>
-
-              {/* Лайки / дизлайки */}
-              <div className="flex gap-4 mt-4">
-                <Button variant="ghost" className="flex items-center gap-2 text-sm">
-                  <ThumbsUpIcon className="w-4 h-4" />
-                  {review.likes}
-                </Button>
-                <Button variant="ghost" className="flex items-center gap-2 text-sm">
-                  <ThumbsDownIcon className="w-4 h-4" />
-                  {review.dislikes}
-                </Button>
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
       </DetailCard>
     </div>

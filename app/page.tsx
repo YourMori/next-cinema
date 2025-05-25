@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Button, Card, Label } from "@/components/ui";
@@ -16,16 +14,6 @@ const films = new Array(10).fill(null).map((_, idx) => ({
 }));
 
 export default function BrowsePage() {
-  // const { status } = useSession();
-
-  // useEffect(() => {
-  //   if (status === "authenticated") {
-  //     toast.success("Вы успешно вошли в аккаунт");
-  //   } else if (status === "unauthenticated") {
-  //     toast.success("Вы вышли из аккаунта");
-  //   }
-  // }, []);
-
   return (
     <div className="w-full">
       {/* Featured Movie */}
